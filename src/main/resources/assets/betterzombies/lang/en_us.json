@@ -1,0 +1,9 @@
+{
+  "language": "English",
+  "language.region": "United States",
+  "language.code": "en_us",
+  "author": "Mad Alchemist",
+
+    "item.betterzombies.basic_zombie_spawn_egg":"Basic Zombie spawn egg",
+	"entity.betterzombies.basic_zombie":"Basic Zombie"
+}
