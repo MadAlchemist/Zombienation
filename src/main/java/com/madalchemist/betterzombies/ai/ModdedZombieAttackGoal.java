@@ -2,7 +2,6 @@ package com.madalchemist.betterzombies.ai;
 
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.ZombieEntity;
 
 public class ModdedZombieAttackGoal extends MeleeAttackGoal {
     private final MonsterEntity zombie;
