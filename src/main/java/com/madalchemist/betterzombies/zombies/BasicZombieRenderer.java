@@ -24,7 +24,7 @@ public class BasicZombieRenderer extends MobRenderer<BasicZombie, PlayerModel<Ba
     @Override
     @Nonnull
     public ResourceLocation getTextureLocation(@Nonnull BasicZombie zombie) {
-        return this.getTexture("zombie_maid");
+        return this.getTexture("zombie_steve");
     }
 
     private ResourceLocation getTexture(String fileName) {
