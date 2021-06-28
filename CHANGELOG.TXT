@@ -1,0 +1,4 @@
+28.06.2021
+> Figured out optimal value of zombie movement speed
+> Changed texture of basic zombie to zombie_steve.png
+> Cleaned up unised imports
