@@ -1,6 +1,11 @@
 .gradle
 /build/
-
+.idea
+run
+.gitattributes
+CREDITS.txt
+LICENSE.txt
+README.txt
 # Ignore Gradle GUI config
 gradle-app.setting
 
