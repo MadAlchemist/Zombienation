@@ -4,6 +4,27 @@
   "language.code": "en_us",
   "author": "Mad Alchemist",
 
-    "item.betterzombies.basic_zombie_spawn_egg":"Basic Zombie spawn egg",
-	"entity.betterzombies.basic_zombie":"Basic Zombie"
+  "item.betterzombies.zombie_1_spawn_egg":"Zombie spawn egg",
+  "entity.betterzombies.zombie_1":"Zombie",
+
+  "item.betterzombies.zombie_2_spawn_egg":"Businessman Zombie  spawn egg",
+  "entity.betterzombies.zombie_2":"Zombie",
+
+  "item.betterzombies.zombie_3_spawn_egg":"Zombie Miner spawn egg",
+  "entity.betterzombies.zombie_3":"Zombie",
+
+  "item.betterzombies.zombie_4_spawn_egg":"Zombie Warrior spawn egg",
+  "entity.betterzombies.zombie_4":"Zombie",
+  
+  "item.betterzombies.zombie_5_spawn_egg":"Hazmat Zombie spawn egg",
+  "entity.betterzombies.zombie_5":"Zombie",
+
+  "item.betterzombies.zombie_6_spawn_egg":"Red Zombie Girl spawn egg",
+  "entity.betterzombies.zombie_6":"Zombie",
+
+  "item.betterzombies.zombie_7_spawn_egg":"Green Zombie Girl spawn egg",
+  "entity.betterzombies.zombie_7":"Zombie",
+
+  "item.betterzombies.zombie_8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
+  "entity.betterzombies.zombie_8":"Zombie"
 }
