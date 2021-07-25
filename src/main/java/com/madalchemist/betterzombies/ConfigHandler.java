@@ -33,7 +33,7 @@ public class ConfigHandler {
                     .comment("Do zombie miners have iron pickaxes?")
                     .define("minersHavePickaxes", true);
             hazmatSuitProtectsFromPotions = builder
-                    .comment("Are hazmat zombies immune to potions?")
+                    .comment("Are hazmat zombies immune to potions? (NOT WORKING YET)")
                     .define("hazmatSuitProtectsFromPotions", true);
             builder.pop();
         }
