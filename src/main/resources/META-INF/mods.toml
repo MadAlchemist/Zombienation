@@ -3,28 +3,27 @@ loaderVersion="[34,)"
 license="All rights reserved"
 
 [[mods]]
-modId="betterzombies"
+modId="zombienation"
 version="1.16.5-0.0.0.0"
-displayName="Better Zombies Mod"
-displayURL=""
+displayName="Zombienation"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/zombienation"
 authors="Mad Alchemist"
-credits="Zombies"
+credits="ewallee"
 description='''
-Do you think that vanilla zombies are boring? Me too!
-From now zombies will have different look and behavior,
-they will not burn in sunlight, and they will infect!
-Survival game will become harder!
+Do you think vanilla zombies are boring?
+This mod adds more zombies, with different faces, voices,
+and special abilities! More features coming soon!
 '''
 logoFile="logo.png"
 
-[[dependencies.betterzombies]] 
+[[dependencies.zombienation]]
     modId="forge" 
     mandatory=true 
     versionRange="[34,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.betterzombies]]
+[[dependencies.zombienation]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.5]"
