@@ -1,0 +1,30 @@
+{
+  "language": "English",
+  "language.region": "United States",
+  "language.code": "en_us",
+  "author": "Mad Alchemist",
+
+  "item.zombienation.zombie_1_spawn_egg":"Zombie spawn egg",
+  "entity.zombienation.zombie_1":"Zombie",
+
+  "item.zombienation.zombie_2_spawn_egg":"Businessman Zombie  spawn egg",
+  "entity.zombienation.zombie_2":"Zombie",
+
+  "item.zombienation.zombie_3_spawn_egg":"Zombie Miner spawn egg",
+  "entity.zombienation.zombie_3":"Zombie",
+
+  "item.zombienation.zombie_4_spawn_egg":"Zombie Warrior spawn egg",
+  "entity.zombienation.zombie_4":"Zombie",
+  
+  "item.zombienation.zombie_5_spawn_egg":"Hazmat Zombie spawn egg",
+  "entity.zombienation.zombie_5":"Zombie",
+
+  "item.zombienation.zombie_6_spawn_egg":"Red Zombie Girl spawn egg",
+  "entity.zombienation.zombie_6":"Zombie",
+
+  "item.zombienation.zombie_7_spawn_egg":"Green Zombie Girl spawn egg",
+  "entity.zombienation.zombie_7":"Zombie",
+
+  "item.zombienation.zombie_8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
+  "entity.zombienation.zombie_8":"Zombie"
+}
