@@ -1,0 +1,34 @@
+{
+  "zombie1_ambient": {
+    "subtitle": "zombienation.zombie1_ambient",
+    "sounds": [ "zombienation:zombie1_ambient" ]
+  },
+  "zombie2_ambient": {
+    "subtitle": "zombienation.zombie2_ambient",
+    "sounds": [ "zombienation:zombie2_ambient" ]
+  },
+  "zombie3_ambient": {
+    "subtitle": "zombienation.zombie3_ambient",
+    "sounds": [ "zombienation:zombie3_ambient" ]
+  },
+  "zombie4_ambient": {
+    "subtitle": "zombienation.zombie4_ambient",
+    "sounds": [ "zombienation:zombie4_ambient" ]
+  },
+  "zombie5_ambient": {
+    "subtitle": "zombienation.zombie5_ambient",
+    "sounds": [ "zombienation:zombie5_ambient" ]
+  },
+  "zombie6_ambient": {
+    "subtitle": "zombienation.zombie6_ambient",
+    "sounds": [ "zombienation:zombie6_ambient" ]
+  },
+  "zombie7_ambient": {
+    "subtitle": "zombienation.zombie7_ambient",
+    "sounds": [ "zombienation:zombie7_ambient" ]
+  },
+  "zombie8_ambient": {
+    "subtitle": "zombienation.zombie8_ambient",
+    "sounds": [ "zombienation:zombie8_ambient" ]
+  }
+}
