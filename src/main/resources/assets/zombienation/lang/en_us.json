@@ -26,5 +26,9 @@
   "entity.zombienation.zombie_7":"Zombie",
 
   "item.zombienation.zombie_8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
-  "entity.zombienation.zombie_8":"Zombie"
+  "entity.zombienation.zombie_8":"Zombie",
+
+  "effect.zombienation.zombie_virus":"Zombie Virus",
+  "item.zombienation.antizombine":"Antizombine",
+  "itemGroup.zombienation": "Zombienation"
 }
