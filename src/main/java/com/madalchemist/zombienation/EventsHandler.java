@@ -1,14 +1,19 @@
 package com.madalchemist.zombienation;
 
+import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import com.madalchemist.zombienation.zombies.*;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -63,8 +68,40 @@ public class EventsHandler {
             /* Is damage source a potion? */
             if (event.getSource().isMagic()) {
                 /* Does hazmat suit protect from potions? */
-                if (ConfigHandler.GENERAL.hazmatSuitProtectsFromPotions.get()){
+                if (ConfigHandler.GENERAL.hazmatSuitProtectsFromPotions.get()) {
                     event.setCanceled(true);
+                }
+            }
+        }
+        /* Is damage source a zombie ? */
+        if (event.getSource().getEntity() instanceof ZombieEntity) {
+            /* Is target a player? */
+            if (event.getEntity() instanceof PlayerEntity) {
+                double d = Math.random();
+                if (d <= ConfigHandler.INFECTION.infectionChance.get()) {
+                    /* Is entity already infected? */
+                    if(!event.getEntityLiving().hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS.getEffect())) {
+                        event.getEntityLiving().addEffect(new EffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigHandler.INFECTION.infectionDuration.get() * 20, (int) 0, true, (false)));
+                    }
+                }
+            }
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onZombieVirusExpired(PotionEvent.PotionExpiryEvent event) {
+        if(event.getPotionEffect().getEffect() == PotionsRegistry.POTION_ZOMBIE_VIRUS) {
+            event.getEntity().hurt(DamageSource.WITHER, Float.MAX_VALUE);
+            if(ConfigHandler.INFECTION.infectionDeathZombification.get()){
+                if(event.getEntity() instanceof PlayerEntity) {
+                    if (!event.getEntity().level.isClientSide()) {
+                        ZombieEntity zombie = new ZombieEntity(event.getEntity().level);
+                        zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        zombie.setCustomName(((PlayerEntity)event.getEntity()).getName());
+                        zombie.setCustomNameVisible(true);
+                        event.getEntity().level.addFreshEntity(zombie);
+                    }
                 }
             }
         }
