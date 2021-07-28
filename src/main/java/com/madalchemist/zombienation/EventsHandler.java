@@ -59,6 +59,16 @@ public class EventsHandler {
                 zombie.equipItemIfPossible(sword);
             }
         }
+
+        /* Is this a Frozen Lumberjack? */
+        if (event.getEntity() instanceof Zombie9) {
+            Zombie9 zombie = (Zombie9) event.getEntity();
+            /* Apply buffs and debuffs specific to Frozen Lumberjacks */
+            zombie.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
+            zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 5, (false), (false)));
+            zombie.addEffect(new EffectInstance(Effects.ABSORPTION, (int) Integer.MAX_VALUE, (int) 5, (false), (false)));
+            zombie.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
+        }
     }
 
     @SubscribeEvent
@@ -100,6 +110,7 @@ public class EventsHandler {
                         zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         zombie.setCustomName(((PlayerEntity)event.getEntity()).getName());
                         zombie.setCustomNameVisible(true);
+                        zombie.setPersistenceRequired();
                         event.getEntity().level.addFreshEntity(zombie);
                     }
                 }
