@@ -37,12 +37,13 @@ public class ZombiesRegistry {
     public static final RegistryObject<EntityType<Zombie6>> ZOMBIE_6 = createEntity("zombie_6", Zombie6::new, 0.8F, 1.95F, 0xff8888, 0x009900);
     public static final RegistryObject<EntityType<Zombie7>> ZOMBIE_7 = createEntity("zombie_7", Zombie7::new, 0.8F, 1.95F, 0xff0000, 0x0000ff);
     public static final RegistryObject<EntityType<Zombie8>> ZOMBIE_8 = createEntity("zombie_8", Zombie8::new, 0.8F, 1.95F, 0xff0000, 0x00ffff);
+    public static final RegistryObject<EntityType<Zombie9>> ZOMBIE_9 = createEntity("zombie_9", Zombie9::new, 0.8F, 1.95F, 0x558855, 0x884488);
 
     private static <T extends MonsterEntity> RegistryObject<EntityType<T>> createEntity(String name, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation("zombienation", name);
         EntityType<T> entity = EntityType.Builder.of(factory, EntityClassification.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
         entities.add(entity);
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ItemGroup.TAB_MISC));
+        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(Zombienation.CREATIVE_TAB));
         spawnEgg.setRegistryName(new ResourceLocation("zombienation", name + "_spawn_egg"));
         SPAWN_EGGS.add(spawnEgg);
 
@@ -59,6 +60,7 @@ public class ZombiesRegistry {
         event.put(ZOMBIE_6.get(), Zombie6.createAttributes().build());
         event.put(ZOMBIE_7.get(), Zombie7.createAttributes().build());
         event.put(ZOMBIE_8.get(), Zombie8.createAttributes().build());
+        event.put(ZOMBIE_9.get(), Zombie9.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -66,7 +68,10 @@ public class ZombiesRegistry {
         for (EntityType entity : entities) {
             Preconditions.checkNotNull(entity.getRegistryName(), "registryName");
             event.getRegistry().register(entity);
-            EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieEntity::checkAnyLightMonsterSpawnRules);
+            //if(entity != ZOMBIE_3.get())
+                EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieEntity::checkAnyLightMonsterSpawnRules);
+            //else
+                //EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieEntity::checkAnyLightMonsterSpawnRules);
         }
     }
 
