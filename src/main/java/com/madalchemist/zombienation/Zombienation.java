@@ -59,6 +59,7 @@ public class Zombienation
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_6.get(), Zombie_6_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_7.get(), Zombie_7_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_8.get(), Zombie_8_Renderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_9.get(), Zombie_9_Renderer::new);
     }
 
     public static void registerDeferredRegistries(IEventBus modBus) {
