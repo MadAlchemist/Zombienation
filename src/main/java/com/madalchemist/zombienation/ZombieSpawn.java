@@ -21,11 +21,15 @@ public class ZombieSpawn {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void addSpawn(BiomeLoadingEvent event) {
         if (event.getName() != null) {
+
             Biome biome = ForgeRegistries.BIOMES.getValue(event.getName());
+
             if (biome != null) {
                 RegistryKey<Biome> biomeKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
                 List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.include.get()));
                 List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.exclude.get()));
+                List<BiomeDictionary.Type> lumberjackList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.frozenLumberjackBiomes.get()));
+
                 if (!includeList.isEmpty()) {
                     Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biomeKey);
                     if (biomeTypes.stream().noneMatch(excludeList::contains) && biomeTypes.stream().anyMatch(includeList::contains)) {
@@ -35,6 +39,7 @@ public class ZombieSpawn {
                         int spawnWeightTough = ConfigHandler.SPAWN.spawnWeightTough.get();
                         int minGroupTough = ConfigHandler.SPAWN.minGroupTough.get();
                         int maxGroupTough = ConfigHandler.SPAWN.maxGroupTough.get();
+
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_1.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_2.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_3.get(), spawnWeightTough, minGroupTough, maxGroupTough));
@@ -43,9 +48,20 @@ public class ZombieSpawn {
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_6.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_7.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_8.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
+
+                        /* Add frozen lumberjacks spawn */
+                        if (biomeTypes.stream().anyMatch(lumberjackList::contains)){
+                            int spawnWeightLumberjack = ConfigHandler.SPAWN.spawnWeightFrozenLumberjack.get();
+                            int groupMinLumberjack = ConfigHandler.SPAWN.minGroupFrozenLumberjack.get();
+                            int groupMaxLumberjack = ConfigHandler.SPAWN.maxGroupFrozenLumberjack.get();
+                            event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_9.get(),
+                                                                                                                    spawnWeightLumberjack,
+                                                                                                                    groupMinLumberjack,
+                                                                                                                    groupMaxLumberjack));
+                        }
                     }
                 } else {
-                    throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
+                    throw new IllegalArgumentException("Do not leave the BiomeDictionary \"include\" or \"frozenLumberjackBiomes\" lists empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
                 }
             }
         }
