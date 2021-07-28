@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation;
 
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -87,6 +88,11 @@ public class ConfigHandler {
         public final ForgeConfigSpec.IntValue minGroupTough;
         public final ForgeConfigSpec.IntValue maxGroupTough;
 
+        public final ForgeConfigSpec.IntValue spawnWeightFrozenLumberjack;
+        public final ForgeConfigSpec.IntValue minGroupFrozenLumberjack;
+        public final ForgeConfigSpec.IntValue maxGroupFrozenLumberjack;
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> frozenLumberjackBiomes;
+
         Spawn(ForgeConfigSpec.Builder builder) {
             builder.push("Spawn");
             builder.comment("BiomeDictionary types to include");
@@ -112,6 +118,17 @@ public class ConfigHandler {
             maxGroupTough = builder
                     .comment("Tough zombie (warriors, miners) max count in group (0-16, vanilla zombies == 4)")
                     .defineInRange("maxGroupTough", 2, 0, 16);
+            builder.comment("Biomes where frozen lumberjacks will spawn:");
+            frozenLumberjackBiomes = builder.defineList("frozenLumberjackBiomes", Collections.singletonList(SNOWY.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+            spawnWeightFrozenLumberjack = builder
+                    .comment("Frozen lumberjack spawn weight, 0-1000, vanilla zombies == 100")
+                    .defineInRange("spawnWeightFrozenLumberjack", 100, 0, 1000);
+            minGroupFrozenLumberjack = builder
+                    .comment("Frozen lumberjacks min count in group, 0-16, vanilla zombies == 2")
+                    .defineInRange("minGroupFrozenLumberjacks", 2, 0, 16);
+            maxGroupFrozenLumberjack = builder
+                    .comment("Frozen lumberjacks max count in group, 0-16, vanilla zombies == 4")
+                    .defineInRange("maxGroupFrozenLumberjacks", 4, 0, 16);
             builder.pop();
         }
     }
