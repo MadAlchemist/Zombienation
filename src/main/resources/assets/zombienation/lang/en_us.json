@@ -28,6 +28,9 @@
   "item.zombienation.zombie_8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
   "entity.zombienation.zombie_8":"Zombie",
 
+  "item.zombienation.zombie_9_spawn_egg":"Frozen Lumberjack spawn egg",
+  "entity.zombienation.zombie_9":"Zombie",
+
   "effect.zombienation.zombie_virus":"Zombie Virus",
   "item.zombienation.antizombine":"Antizombine",
   "itemGroup.zombienation": "Zombienation"
