@@ -1,0 +1,37 @@
+{
+  "language": "Russian",
+  "language.region": "Russia",
+  "language.code": "ru_ru",
+  "author": "Mad Alchemist",
+
+  "item.zombienation.zombie_1_spawn_egg":"Яйцо призыва: зомби",
+  "entity.zombienation.zombie_1":"Зомби",
+
+  "item.zombienation.zombie_2_spawn_egg":"Яйцо призыва: зомби-бизнесмен",
+  "entity.zombienation.zombie_2":"Зомби",
+
+  "item.zombienation.zombie_3_spawn_egg":"Яйцо призыва: зомби-шахтёр",
+  "entity.zombienation.zombie_3":"Зомби",
+
+  "item.zombienation.zombie_4_spawn_egg":"Яйцо призыва: зомби-воин",
+  "entity.zombienation.zombie_4":"Зомби",
+  
+  "item.zombienation.zombie_5_spawn_egg":"Яйцо призыва: зомби в костюме химзащиты",
+  "entity.zombienation.zombie_5":"Зомби",
+
+  "item.zombienation.zombie_6_spawn_egg":"Яйцо призыва: красная зомби-девушка",
+  "entity.zombienation.zombie_6":"Зомби",
+
+  "item.zombienation.zombie_7_spawn_egg":"Яйцо призыва: зелёная зомби-девушка",
+  "entity.zombienation.zombie_7":"Зомби",
+
+  "item.zombienation.zombie_8_spawn_egg":"Яйцо призыва: зомби-девушка с цветами на голове",
+  "entity.zombienation.zombie_8":"Зомби",
+
+  "item.zombienation.zombie_9_spawn_egg":"Яйцо призыва: замёрзший дровосек",
+  "entity.zombienation.zombie_9":"Зомби",
+
+  "effect.zombienation.zombie_virus":"Зомби-вирус",
+  "item.zombienation.antizombine":"Антизомбин",
+  "itemGroup.zombienation": "Zombienation"
+}
