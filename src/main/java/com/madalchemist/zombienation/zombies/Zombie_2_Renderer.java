@@ -27,7 +27,7 @@ public class Zombie_2_Renderer extends AbstractZombieRenderer<Zombie2,ZombieMode
 
     @Nonnull
     public ResourceLocation getTextureLocation(@Nonnull Zombie2 zombie) {
-        return this.getTexture("zombie_2");
+        return this.getTexture("skinhusk");
     }
 
     private ResourceLocation getTexture(String fileName) {
