@@ -4,31 +4,31 @@
   "language.code": "lv_lv",
   "author": "Mad Alchemist",
 
-  "item.zombienation.zombie_1_spawn_egg":"Piesaukšanas ola: zombijs",
+  "item.zombienation.zombie_1_spawn_egg":"Zombija īsajās biksēs radīšanas ola",
   "entity.zombienation.zombie_1":"Zombijs",
 
-  "item.zombienation.zombie_2_spawn_egg":"Piesaukšanas ola: biznesa zombijs",
+  "item.zombienation.zombie_2_spawn_egg":"Huska ar pliku galvu radīšanas ola",
   "entity.zombienation.zombie_2":"Zombijs",
 
-  "item.zombienation.zombie_3_spawn_egg":"Piesaukšanas ola: zombijs-kalnracis",
+  "item.zombienation.zombie_3_spawn_egg":"Zombija-kalnrača radīšanas ola",
   "entity.zombienation.zombie_3":"Zombijs",
 
-  "item.zombienation.zombie_4_spawn_egg":"Piesaukšanas ola: zombijs-kareivis",
+  "item.zombienation.zombie_4_spawn_egg":"Zombija-kareivja radīšanas ola",
   "entity.zombienation.zombie_4":"Zombijs",
   
-  "item.zombienation.zombie_5_spawn_egg":"Piesaukšanas ola: zombijs ķīmiskas aizsardzības tērpā",
+  "item.zombienation.zombie_5_spawn_egg":"Zombija ķīmiskās aizsardzības terpā radīšanas ola",
   "entity.zombienation.zombie_5":"Zombijs",
 
-  "item.zombienation.zombie_6_spawn_egg":"Piesaukšanas ola: sarkanā meitene-zombijs",
+  "item.zombienation.zombie_6_spawn_egg":"Zombija Aleksas radīšanas ola",
   "entity.zombienation.zombie_6":"Zombijs",
 
-  "item.zombienation.zombie_7_spawn_egg":"Piesaukšanas ola: zaļā meitene-zombijs",
+  "item.zombienation.zombie_7_spawn_egg":"Huska meitenes radīšanas ola",
   "entity.zombienation.zombie_7":"Zombijs",
 
-  "item.zombienation.zombie_8_spawn_egg":"Piesaukšanas ola: meitene-zombijs ar ziediem uz galvas",
+  "item.zombienation.zombie_8_spawn_egg":"Zombija meitenes ar ziediem uz galvas radīšanas ola",
   "entity.zombienation.zombie_8":"Zombijs",
 
-  "item.zombienation.zombie_9_spawn_egg":"Piesaukšanas ola: nosalušais mežcirtis",
+  "item.zombienation.zombie_9_spawn_egg":"Nosaluša mežcirša radīšanas ola",
   "entity.zombienation.zombie_9":"Zombijs",
 
   "effect.zombienation.zombie_virus":"Zombiju vīruss",
