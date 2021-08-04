@@ -4,9 +4,14 @@ Version 1.16.5-1.0.1.0
 * Added antizombine
 * Added creative tab
 28.07.2021
-Version 1.16.5-1.0.1.0
+Version 1.16.5-1.0.2.0
 * Added frozen lumberjack
 * Added russian translation
 * Added latvian translation
 * Moved all spawn eggs to mod's creative tab
-
+04.08.2021
+Version 1.6.15-1.0.2.1
+* Changed textures to better fit with vanilla style
+* Renamed some zombies
+* Updated translations
+* Moved unused textures to their own directory
