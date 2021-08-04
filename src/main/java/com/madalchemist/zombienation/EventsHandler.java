@@ -35,7 +35,9 @@ public class EventsHandler {
             zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
             /* Create helmet and pickaxe */
             ItemStack helmet = new ItemStack(Items.IRON_HELMET);
+            //helmet.enchant(Enchantments.VANISHING_CURSE, 1);
             ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
+            //pickaxe.enchant(Enchantments.VANISHING_CURSE, 5);
 
             /* Try to equip helmet */
             zombie.equipItemIfPossible(helmet);
@@ -56,6 +58,7 @@ public class EventsHandler {
             if(ConfigHandler.GENERAL.warriorsHaveSwords.get()) {
                 ItemStack sword = new ItemStack(Items.IRON_SWORD);
                 sword.enchant(Enchantments.SHARPNESS, 5);
+                sword.enchant(Enchantments.VANISHING_CURSE, 5);
                 zombie.equipItemIfPossible(sword);
             }
         }
