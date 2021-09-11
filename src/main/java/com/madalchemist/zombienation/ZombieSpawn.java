@@ -29,6 +29,7 @@ public class ZombieSpawn {
                 List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.include.get()));
                 List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.exclude.get()));
                 List<BiomeDictionary.Type> lumberjackList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.frozenLumberjackBiomes.get()));
+                List<BiomeDictionary.Type> bearList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(ConfigHandler.SPAWN.bearBiomes.get()));
 
                 if (!includeList.isEmpty()) {
                     Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(biomeKey);
@@ -58,6 +59,26 @@ public class ZombieSpawn {
                                                                                                                     spawnWeightLumberjack,
                                                                                                                     groupMinLumberjack,
                                                                                                                     groupMaxLumberjack));
+                        }
+                        /* Add bear spawn */
+                        if (biomeTypes.stream().anyMatch(bearList::contains)){
+                            int spawnWeightBrownBear = ConfigHandler.SPAWN.spawnWeightBrownBear.get();
+                            int groupMinBrownBear = ConfigHandler.SPAWN.minGroupBrownBear.get();
+                            int groupMaxBrownBear = ConfigHandler.SPAWN.maxGroupBrownBear.get();
+                            event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(ZombiesRegistry.BROWN_BEAR.get(),
+                                    spawnWeightBrownBear,
+                                    groupMinBrownBear,
+                                    groupMaxBrownBear));
+                        }
+                        /* Add zombie bear spawn */
+                        if (biomeTypes.stream().anyMatch(bearList::contains)){
+                            int spawnWeightZombieBear = ConfigHandler.SPAWN.spawnWeightZombieBear.get();
+                            int groupMinZombieBear = ConfigHandler.SPAWN.minGroupZombieBear.get();
+                            int groupMaxZombieBear = ConfigHandler.SPAWN.maxGroupZombieBear.get();
+                            event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_BEAR.get(),
+                                    spawnWeightZombieBear,
+                                    groupMinZombieBear,
+                                    groupMaxZombieBear));
                         }
                     }
                 } else {
