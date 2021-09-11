@@ -31,6 +31,12 @@
   "item.zombienation.zombie_9_spawn_egg":"Frozen Lumberjack spawn egg",
   "entity.zombienation.zombie_9":"Zombie",
 
+  "item.zombienation.zombie_bear_spawn_egg":"Zombie bear spawn egg",
+  "entity.zombienation.zombie_bear":"Zombie bear",
+
+  "item.zombienation.brown_bear_spawn_egg":"Brown bear spawn egg",
+  "entity.zombienation.brown_bear":"Brown bear",
+
   "effect.zombienation.zombie_virus":"Zombie Virus",
   "item.zombienation.antizombine":"Antizombine",
   "itemGroup.zombienation": "Zombienation"
