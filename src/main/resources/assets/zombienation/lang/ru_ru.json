@@ -31,6 +31,12 @@
   "item.zombienation.zombie_9_spawn_egg":"Яйцо призыва замёрзшего дровосека",
   "entity.zombienation.zombie_9":"Зомби",
 
+  "item.zombienation.zombie_bear_spawn_egg":"Яйцо призыва зомби-медведя",
+  "entity.zombienation.zombie_bear":"Зомби-медведь",
+
+  "item.zombienation.brown_bear_spawn_egg":"Яйцо призыва бурого медведя",
+  "entity.zombienation.brown_bear":"Бурый медведь",
+
   "effect.zombienation.zombie_virus":"Зомби-вирус",
   "item.zombienation.antizombine":"Антизомбин",
   "itemGroup.zombienation": "Zombienation"
