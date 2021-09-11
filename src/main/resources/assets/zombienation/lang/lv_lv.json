@@ -31,6 +31,12 @@
   "item.zombienation.zombie_9_spawn_egg":"Nosaluša mežcirša radīšanas ola",
   "entity.zombienation.zombie_9":"Zombijs",
 
+  "item.zombienation.zombie_bear_spawn_egg":"Lāča-zombija radīšanas ola",
+  "entity.zombienation.zombie_bear":"Lācis-zombijs",
+
+  "item.zombienation.brown_bear_spawn_egg":"Brūna lāča radīšanas ola",
+  "entity.zombienation.brown_bear":"Brūnais lācis",
+
   "effect.zombienation.zombie_virus":"Zombiju vīruss",
   "item.zombienation.antizombine":"Antizombīns",
   "itemGroup.zombienation": "Zombienation"
