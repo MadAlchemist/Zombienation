@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation;
 
+import com.madalchemist.zombienation.animals.BrownBearRenderer;
 import com.madalchemist.zombienation.potions.AntizombineRecipe;
 import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import com.madalchemist.zombienation.zombies.*;
@@ -60,6 +61,8 @@ public class Zombienation
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_7.get(), Zombie_7_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_8.get(), Zombie_8_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_9.get(), Zombie_9_Renderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.BROWN_BEAR.get(), BrownBearRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_BEAR.get(), ZombieBearRenderer::new);
     }
 
     public static void registerDeferredRegistries(IEventBus modBus) {
