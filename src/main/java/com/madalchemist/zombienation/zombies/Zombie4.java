@@ -2,9 +2,12 @@ package com.madalchemist.zombienation.zombies;
 
 import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.SoundsRegistry;
+import com.madalchemist.zombienation.animals.BrownBearEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -37,5 +40,12 @@ public class Zombie4 extends ZombieEntity {
     }
     protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
         this.playSound(this.getStepSound(), 0.15F, 1.0F);
+    }
+
+    @Override
+    public void registerGoals() {
+        super.registerGoals();
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBearEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
     }
 }
