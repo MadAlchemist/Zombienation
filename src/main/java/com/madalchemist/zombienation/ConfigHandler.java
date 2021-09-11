@@ -93,12 +93,25 @@ public class ConfigHandler {
         public final ForgeConfigSpec.IntValue maxGroupFrozenLumberjack;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> frozenLumberjackBiomes;
 
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> bearBiomes;
+        public final ForgeConfigSpec.IntValue spawnWeightBrownBear;
+        public final ForgeConfigSpec.IntValue minGroupBrownBear;
+        public final ForgeConfigSpec.IntValue maxGroupBrownBear;
+        public final ForgeConfigSpec.IntValue spawnWeightZombieBear;
+        public final ForgeConfigSpec.IntValue minGroupZombieBear;
+        public final ForgeConfigSpec.IntValue maxGroupZombieBear;
+
+
         Spawn(ForgeConfigSpec.Builder builder) {
             builder.push("Spawn");
-            builder.comment("BiomeDictionary types to include");
-            include = builder.defineList("include", Collections.singletonList(OVERWORLD.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
-            builder.comment("BiomeDictionary types to exclude (overrides \"include\")");
-            exclude = builder.defineList("exclude", Arrays.asList(NETHER.toString(), END.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+
+            include = builder
+                    .comment("BiomeDictionary types to include")
+                    .defineList("include", Collections.singletonList(OVERWORLD.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+
+            exclude = builder
+                    .comment("BiomeDictionary types to exclude (overrides \"include\")")
+                    .defineList("exclude", Arrays.asList(NETHER.toString(), END.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
 
             spawnWeightNormal = builder
                     .comment("Normal zombie spawn weight (0-1000, vanilla zombies == 100")
@@ -118,8 +131,10 @@ public class ConfigHandler {
             maxGroupTough = builder
                     .comment("Tough zombie (warriors, miners) max count in group (0-16, vanilla zombies == 4)")
                     .defineInRange("maxGroupTough", 2, 0, 16);
-            builder.comment("Biomes where frozen lumberjacks will spawn:");
-            frozenLumberjackBiomes = builder.defineList("frozenLumberjackBiomes", Collections.singletonList(SNOWY.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+
+            frozenLumberjackBiomes = builder
+                    .comment("Biomes where frozen lumberjacks will spawn:")
+                    .defineList("frozenLumberjackBiomes", Collections.singletonList(SNOWY.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
             spawnWeightFrozenLumberjack = builder
                     .comment("Frozen lumberjack spawn weight, 0-1000, vanilla zombies == 100")
                     .defineInRange("spawnWeightFrozenLumberjack", 100, 0, 1000);
@@ -129,6 +144,27 @@ public class ConfigHandler {
             maxGroupFrozenLumberjack = builder
                     .comment("Frozen lumberjacks max count in group, 0-16, vanilla zombies == 4")
                     .defineInRange("maxGroupFrozenLumberjacks", 4, 0, 16);
+            bearBiomes = builder
+                    .comment("Biomes where brown bears and zombie bears will spawn:")
+                    .defineList("bearBiomes", Collections.singletonList(FOREST.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+            spawnWeightBrownBear = builder
+                    .comment("Brown bear spawn weight:")
+                    .defineInRange("spawnWeightBrownBear", 10, 0, 1000);
+            minGroupBrownBear = builder
+                    .comment("Brown bear min count in group, 0-16:")
+                    .defineInRange("minGroupBrownBear", 1, 0, 16);
+            maxGroupBrownBear = builder
+                    .comment("Brown bear max count in group, 0-16:")
+                    .defineInRange("maxGroupBrownBear", 3, 0, 16);
+            spawnWeightZombieBear = builder
+                    .comment("Zombie bear spawn weight:")
+                    .defineInRange("spawnWeightZombieBear", 10, 0, 1000);
+            minGroupZombieBear = builder
+                    .comment("Zombie bear min count in group, 0-16:")
+                    .defineInRange("minGroupZombieBear", 1, 0, 16);
+            maxGroupZombieBear = builder
+                    .comment("Zombie bear max count in group, 0-16:")
+                    .defineInRange("maxGroupZombieBear", 3, 0, 16);
             builder.pop();
         }
     }
