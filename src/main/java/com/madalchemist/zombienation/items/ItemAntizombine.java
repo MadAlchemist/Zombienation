@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation.items;
 
+import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.CreativeTab;
 import com.madalchemist.zombienation.PotionsRegistry;
 import com.madalchemist.zombienation.Zombienation;
@@ -20,7 +21,9 @@ public class ItemAntizombine extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        entityLiving.removeEffectNoUpdate(PotionsRegistry.POTION_ZOMBIE_VIRUS);
+        if(!ConfigHandler.INFECTION.hardcoreInfection.get()) {
+            entityLiving.removeEffectNoUpdate(PotionsRegistry.POTION_ZOMBIE_VIRUS);
+        }
         stack.shrink(1);
         return stack;
     }
