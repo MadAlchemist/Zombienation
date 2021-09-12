@@ -19,3 +19,13 @@ Version 1.6.15-1.0.2.1
 Version 1.16.5-1.0.3.0
 * Added brown bear
 * Added zombie bear
+12.09.2021
+Version 1.16.5-1.0.4.0
+* Added animal infection
+* Added villager infection
+* Added hardcore (no cure) infection mode
+* Added villager and animal healing mechanics
+* Brown bears now attack any zombies on sight
+* Brown bears gain Regeneration I for 10 seconds from killing zombies
+* Zombies now attack horses
+* Vanilla zombies and villagers are now immune to sun
