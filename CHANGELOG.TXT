@@ -15,3 +15,7 @@ Version 1.6.15-1.0.2.1
 * Renamed some zombies
 * Updated translations
 * Moved unused textures to their own directory
+11.09.2021
+Version 1.16.5-1.0.3.0
+* Added brown bear
+* Added zombie bear
