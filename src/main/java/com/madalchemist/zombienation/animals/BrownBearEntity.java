@@ -1,15 +1,18 @@
 package com.madalchemist.zombienation.animals;
 
 import com.madalchemist.zombienation.ZombiesRegistry;
+import com.madalchemist.zombienation.zombies.ZombieBear;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
+import net.minecraft.entity.passive.horse.ZombieHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -70,11 +73,14 @@ public class BrownBearEntity extends PolarBearEntity {
       this.targetSelector.addGoal(2, new BrownBearEntity.AttackPlayerGoal());
       this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
       this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, FoxEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
+      this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, ZombieEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
+      this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, ZombieBear.class, 10, true, true, (Predicate<LivingEntity>)null));
+      this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, ZombieHorseEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
       this.targetSelector.addGoal(5, new ResetAngerGoal<>(this, false));
    }
 
    public static AttributeModifierMap.MutableAttribute createAttributes() {
-      return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.FOLLOW_RANGE, 20.0D).add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.ATTACK_DAMAGE, 6.0D);
+      return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 60.0D).add(Attributes.FOLLOW_RANGE, 20.0D).add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.ATTACK_DAMAGE, 15.0D);
    }
 
    public static boolean checkBrownBearSpawnRules(EntityType<BrownBearEntity> p_223320_0_, IWorld p_223320_1_, SpawnReason p_223320_2_, BlockPos p_223320_3_, Random p_223320_4_) {
