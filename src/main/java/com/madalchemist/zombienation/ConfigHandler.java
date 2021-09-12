@@ -50,6 +50,7 @@ public class ConfigHandler {
         public final ForgeConfigSpec.BooleanValue infectionNausea;
         public final ForgeConfigSpec.BooleanValue infectionWeakness;
         public final ForgeConfigSpec.BooleanValue infectionDeathZombification;
+        public final ForgeConfigSpec.BooleanValue hardcoreInfection;
 
 
         Infection(ForgeConfigSpec.Builder builder) {
@@ -72,6 +73,10 @@ public class ConfigHandler {
             infectionDeathZombification = builder
                     .comment("Spawn vanilla zombie when player dies from infection?")
                     .define("infectionDeathZombification",true);
+            hardcoreInfection = builder
+                    .comment("Enable hardcore infection (disables cure for players, infected = dead)?")
+                    .define("hardcoreInfection", false);
+
             builder.pop();
         }
     }
