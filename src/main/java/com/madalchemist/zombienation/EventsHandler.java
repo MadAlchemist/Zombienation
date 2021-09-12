@@ -1,10 +1,19 @@
 package com.madalchemist.zombienation;
 
+import com.madalchemist.zombienation.animals.BrownBearEntity;
 import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import com.madalchemist.zombienation.zombies.*;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.passive.PolarBearEntity;
+import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.passive.horse.HorseEntity;
+import net.minecraft.entity.passive.horse.ZombieHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -13,6 +22,8 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -88,8 +99,31 @@ public class EventsHandler {
         }
         /* Is damage source a zombie ? */
         if (event.getSource().getEntity() instanceof ZombieEntity) {
-            /* Is target a player? */
-            if (event.getEntity() instanceof PlayerEntity) {
+            /* Is target infectable? */
+            if (isInfectable(event.getEntity())) {
+                double d = Math.random();
+                if (d <= ConfigHandler.INFECTION.infectionChance.get()) {
+                    /* Is entity already infected? */
+                    if(!event.getEntityLiving().hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS.getEffect())) {
+                        event.getEntityLiving().addEffect(new EffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigHandler.INFECTION.infectionDuration.get() * 20, (int) 0, true, (false)));
+                    }
+                }
+            }
+            /* If target is bear or horse, zombies deal very little damage */
+            if(event.getEntity() instanceof PolarBearEntity ||
+               event.getEntity() instanceof BrownBearEntity ||
+               event.getEntity() instanceof HorseEntity) {
+                   LivingEntity entity = event.getEntityLiving();
+                   ZombieEntity zombie = (ZombieEntity)event.getSource().getEntity();
+                   event.setCanceled(true);
+                   entity.hurt(DamageSource.GENERIC, 0.1f);
+            }
+        }
+
+        /* Is damage source a zombie bear ? */
+        if (event.getSource().getEntity() instanceof ZombieBear) {
+            /* Is target infectable? */
+            if (isInfectable(event.getEntity())) {
                 double d = Math.random();
                 if (d <= ConfigHandler.INFECTION.infectionChance.get()) {
                     /* Is entity already infected? */
@@ -101,6 +135,68 @@ public class EventsHandler {
         }
     }
 
+    public static boolean isInfectable(Entity entity) {
+        if(entity instanceof PlayerEntity ||
+           entity instanceof VillagerEntity ||
+           entity instanceof PolarBearEntity ||
+           entity instanceof BrownBearEntity ||
+           entity instanceof WolfEntity ||
+           entity instanceof HorseEntity) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @SubscribeEvent
+    public static void onDeath(LivingDeathEvent event) {
+        //If dies infected polar or brown bear, spawn zombie bear.
+        if (event.getEntity() instanceof PolarBearEntity || event.getEntity() instanceof BrownBearEntity) {
+            if(((PolarBearEntity) event.getEntity()).hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS)) {
+                ZombieBear zombear = new ZombieBear(ZombiesRegistry.ZOMBIE_BEAR.get(), event.getEntity().level);
+                zombear.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                event.getEntity().level.addFreshEntity(zombear);
+            }
+        }
+
+        //If dies zombie, zombie bear, or zombie horse, and it is killed by brown bear,
+        //apply regeneration to that bear for 10 seconds
+        if(event.getEntity() instanceof ZombieEntity || event.getEntity() instanceof ZombieBear || event.getEntity() instanceof ZombieHorseEntity) {
+            if(event.getSource().getEntity() instanceof BrownBearEntity) {
+                ((LivingEntity)event.getSource().getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, 200, (int) 0, true, false));
+            }
+        }
+
+        //If dies horse, spawn zombie horse
+        if (event.getEntity() instanceof HorseEntity) {
+            if(((HorseEntity) event.getEntity()).hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS)) {
+                ZombieHorseEntity zombie = new ZombieHorseEntity(EntityType.ZOMBIE_HORSE, event.getEntity().level);
+                zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                if (event.getEntity().hasCustomName()) {
+                    zombie.setCustomName(event.getEntity().getCustomName());
+                }
+                event.getEntity().level.addFreshEntity(zombie);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onUpdate(LivingEvent.LivingUpdateEvent event) {
+        if(event.getEntityLiving() instanceof ZombieEntity) {
+            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava()) {
+                if(!ConfigHandler.GENERAL.burnAtDay.get()) {
+                    event.getEntityLiving().clearFire();
+                }
+            }
+        }
+        if(event.getEntityLiving() instanceof ZombieVillagerEntity) {
+            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava()) {
+                if(!ConfigHandler.GENERAL.burnAtDay.get()) {
+                    event.getEntityLiving().clearFire();
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onZombieVirusExpired(PotionEvent.PotionExpiryEvent event) {
@@ -116,6 +212,18 @@ public class EventsHandler {
                         zombie.setPersistenceRequired();
                         event.getEntity().level.addFreshEntity(zombie);
                     }
+                }
+
+                if(event.getEntity() instanceof VillagerEntity) {
+                    ZombieVillagerEntity zombie = new ZombieVillagerEntity(EntityType.ZOMBIE_VILLAGER, event.getEntity().level);
+                    if(event.getEntity().hasCustomName()) {
+                        zombie.setCustomName(event.getEntity().getCustomName());
+                    }
+                    zombie.setBaby(((VillagerEntity)event.getEntity()).isBaby());
+                    zombie.setVillagerData(((VillagerEntity)event.getEntity()).getVillagerData());
+                    zombie.setPos(event.getEntity().getX(),event.getEntity().getY(),event.getEntity().getZ());
+                    event.getEntity().level.addFreshEntity(zombie);
+                    event.getEntity().remove();
                 }
             }
         }
