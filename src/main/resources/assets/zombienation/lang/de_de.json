@@ -1,0 +1,43 @@
+{
+  "language": "Deutsch",
+  "language.region": "Deutschland",
+  "language.code": "de_de",
+  "author": "Mad Alchemist",
+
+  "item.zombienation.zombie_1_spawn_egg":"Erschaffe Zombie in kurzen Hosen",
+  "entity.zombienation.zombie_1":"Zombie",
+
+  "item.zombienation.zombie_2_spawn_egg":"Erschaffe glatzköpfiger Wüstenzombie",
+  "entity.zombienation.zombie_2":"Zombie",
+
+  "item.zombienation.zombie_3_spawn_egg":"Erschaffe Zombie Bergarbeiter",
+  "entity.zombienation.zombie_3":"Zombie",
+
+  "item.zombienation.zombie_4_spawn_egg":"Erschaffe Zombie Soldat",
+  "entity.zombienation.zombie_4":"Zombie",
+  
+  "item.zombienation.zombie_5_spawn_egg":"Erschaffe Zombie im Chemikalienschutzanzug",
+  "entity.zombienation.zombie_5":"Zombie",
+
+  "item.zombienation.zombie_6_spawn_egg":"Erschaffe Zombie Alex",
+  "entity.zombienation.zombie_6":"Zombie",
+
+  "item.zombienation.zombie_7_spawn_egg":"Erschaffe Kadaver Mädchen",
+  "entity.zombienation.zombie_7":"Zombie",
+
+  "item.zombienation.zombie_8_spawn_egg":"Erschaffe Kadaver Mädchen mit Blumen",
+  "entity.zombienation.zombie_8":"Zombie",
+
+  "item.zombienation.zombie_9_spawn_egg":"Erschaffe gefrorener Holzfäller",
+  "entity.zombienation.zombie_9":"Holzfäller",
+
+  "item.zombienation.zombie_bear_spawn_egg":"Erschaffe Zombiebär",
+  "entity.zombienation.zombie_bear":"Zombiebär",
+
+  "item.zombienation.brown_bear_spawn_egg":"Erschaffe Braunbär",
+  "entity.zombienation.brown_bear":"Braunbär",
+
+  "effect.zombienation.zombie_virus":"Zombie-Virus",
+  "item.zombienation.antizombine":"Antizombien",
+  "itemGroup.zombienation": "Zombienation"
+}
