@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-1.0.4.0'
+version = '1.16.5-1.0.4.4'
 group = 'com.madalchemist.zombienation' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'zombienation'
 
@@ -39,8 +39,10 @@ minecraft {
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
     runs {
+
         client {
             workingDirectory project.file('run')
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.zombienation.json'
 
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed. 
@@ -143,12 +145,16 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Title": "madalchemist",
+            "Specification-Vendor": "madalchemist",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Version": project.version,
+            "Implementation-Vendor" : "madalchemist",
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "MixinConfigs": "mixins.zombienation.json",
+            "FMLCorePluginContainsFMLMod": "true",
+            "ForceLoadAsMod": "true",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
