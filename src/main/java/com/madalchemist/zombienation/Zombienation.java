@@ -2,8 +2,10 @@ package com.madalchemist.zombienation;
 
 import com.madalchemist.zombienation.animals.BrownBearRenderer;
 import com.madalchemist.zombienation.potions.AntizombineRecipe;
+import com.madalchemist.zombienation.potions.PotionModdedOnFire;
 import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import com.madalchemist.zombienation.zombies.*;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
@@ -61,7 +63,9 @@ public class Zombienation
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_7.get(), Zombie_7_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_8.get(), Zombie_8_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_9.get(), Zombie_9_Renderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.CHESTHEAD.get(), ChestHeadRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.BROWN_BEAR.get(), BrownBearRenderer::new);
+        //RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.CYBERZOMBIE.get(), Cyberzombie_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_BEAR.get(), ZombieBearRenderer::new);
     }
 
@@ -73,5 +77,6 @@ public class Zombienation
     public void onRegisterEffects(Registrator<Effect> reg)
     {
         reg.register(new ResourceLocation("zombienation", "zombie_virus"), new PotionZombieVirus(EffectType.HARMFUL, 0));
+        //reg.register(new ResourceLocation("zombienation", "modded_onfire"), new PotionModdedOnFire(EffectType.HARMFUL, 0));
     }
 }
