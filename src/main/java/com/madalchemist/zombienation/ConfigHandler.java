@@ -1,9 +1,14 @@
 package com.madalchemist.zombienation;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +26,19 @@ public class ConfigHandler {
         public final ForgeConfigSpec.BooleanValue warriorsHaveSwords;
         public final ForgeConfigSpec.BooleanValue minersHavePickaxes;
         public final ForgeConfigSpec.BooleanValue hazmatSuitProtectsFromPotions;
+        public final ForgeConfigSpec.ConfigValue<List<? extends String>> chestheadLoot;
+
+        public static boolean itemExists(String ID) {
+            String id_parts[] = ID.split(":");
+            if(id_parts.length <= 1 || id_parts.length > 3) { return false; }
+            if(ForgeRegistries.ITEMS.getValue(new ResourceLocation(id_parts[0], id_parts[1])) == null) {return false;}
+            return true;
+        }
 
         General(ForgeConfigSpec.Builder builder) {
             builder.push("General");
             burnAtDay = builder
-                    .comment("Do modded zombies burn at day (not affects vanilla zombies)?")
+                    .comment("Do zombies burn at day?")
                     .define("burnAtDay", false);
             warriorsHaveSwords = builder
                     .comment("Do zombie warriors have enchanted iron swords?")
@@ -36,6 +49,9 @@ public class ConfigHandler {
             hazmatSuitProtectsFromPotions = builder
                     .comment("Are hazmat zombies immune to potions?")
                     .define("hazmatSuitProtectsFromPotions", true);
+            chestheadLoot = builder
+                    .comment("Possible chesthead loot")
+                    .defineList("chestheadLoot", new ArrayList<String>(), o -> itemExists(o.toString()));
 
             builder.pop();
         }
@@ -51,7 +67,6 @@ public class ConfigHandler {
         public final ForgeConfigSpec.BooleanValue infectionWeakness;
         public final ForgeConfigSpec.BooleanValue infectionDeathZombification;
         public final ForgeConfigSpec.BooleanValue hardcoreInfection;
-
 
         Infection(ForgeConfigSpec.Builder builder) {
             builder.push("Infection");
