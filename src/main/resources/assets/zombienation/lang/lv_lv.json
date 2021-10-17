@@ -39,5 +39,8 @@
 
   "effect.zombienation.zombie_virus":"Zombiju vīruss",
   "item.zombienation.antizombine":"Antizombīns",
-  "itemGroup.zombienation": "Zombienation"
+  "itemGroup.zombienation": "Zombienation",
+
+  "item.zombienation.chesthead_spawn_egg":"Zombija ar kasti uz galvas radīšanas ola",
+  "entity.zombienation.chesthead": "Zombijs"
 }
