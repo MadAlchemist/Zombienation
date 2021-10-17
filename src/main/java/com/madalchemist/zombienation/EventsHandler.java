@@ -83,6 +83,23 @@ public class EventsHandler {
             zombie.addEffect(new EffectInstance(Effects.ABSORPTION, (int) Integer.MAX_VALUE, (int) 5, (false), (false)));
             zombie.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
         }
+
+        /* Is this a Cyberzombie? */
+        //if (event.getEntity() instanceof Cyberzombie) {
+        //    Cyberzombie zombie = (Cyberzombie) event.getEntity();
+        //    ItemStack helmet = new ItemStack(Items.NETHERITE_HELMET, 1);
+        //    ItemStack chest = new ItemStack(Items.NETHERITE_CHESTPLATE, 1);
+        //    ItemStack legs = new ItemStack(Items.NETHERITE_LEGGINGS, 1);
+        //    ItemStack boots = new ItemStack(Items.NETHERITE_BOOTS, 1);
+        //    //helmet.enchant(Enchantments.UNBREAKING, 100);
+        //    //chest.enchant(Enchantments.UNBREAKING, 100);
+        //    //legs.enchant(Enchantments.UNBREAKING, 100);
+        //    //boots.enchant(Enchantments.UNBREAKING, 100);
+        //    zombie.equipItemIfPossible(helmet);
+        //    zombie.equipItemIfPossible(chest);
+        //    zombie.equipItemIfPossible(legs);
+        //    zombie.equipItemIfPossible(boots);
+        //}
     }
 
     @SubscribeEvent
@@ -133,6 +150,13 @@ public class EventsHandler {
                 }
             }
         }
+        /*
+        if(event.getSource().isFire()) {
+            if(event.getEntityLiving() instanceof ZombieEntity) {
+                event.getEntityLiving().addEffect(new EffectInstance(PotionsRegistry.POTION_MODDED_ONFIRE, 1200, 2, false, false));
+            }
+        }
+        */
     }
 
     public static boolean isInfectable(Entity entity) {
@@ -179,25 +203,25 @@ public class EventsHandler {
             }
         }
     }
-
+/*
     @SubscribeEvent
     public static void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if(event.getEntityLiving() instanceof ZombieEntity) {
-            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava()) {
+            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava() && !event.getEntityLiving().hasEffect(PotionsRegistry.POTION_MODDED_ONFIRE)) {
                 if(!ConfigHandler.GENERAL.burnAtDay.get()) {
                     event.getEntityLiving().clearFire();
                 }
             }
         }
         if(event.getEntityLiving() instanceof ZombieVillagerEntity) {
-            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava()) {
+            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava() && !event.getEntityLiving().hasEffect(PotionsRegistry.POTION_MODDED_ONFIRE)) {
                 if(!ConfigHandler.GENERAL.burnAtDay.get()) {
                     event.getEntityLiving().clearFire();
                 }
             }
         }
     }
-
+*/
     @SubscribeEvent
     public static void onZombieVirusExpired(PotionEvent.PotionExpiryEvent event) {
         if(event.getPotionEffect().getEffect() == PotionsRegistry.POTION_ZOMBIE_VIRUS) {
