@@ -39,5 +39,8 @@
 
   "effect.zombienation.zombie_virus":"Zombie-Virus",
   "item.zombienation.antizombine":"Antizombien",
-  "itemGroup.zombienation": "Zombienation"
+  "itemGroup.zombienation": "Zombienation",
+
+  "item.zombienation.chesthead_spawn_egg":"Erschaffe Zombie mit Kopfкasten",
+  "entity.zombienation.chesthead": "Zombie"
 }
