@@ -49,6 +49,7 @@ public class ZombieSpawn {
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_6.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_7.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
                         event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.ZOMBIE_8.get(), spawnWeightNormal, minGroupNormal, maxGroupNormal));
+                        event.getSpawns().getSpawner(EntityClassification.MONSTER).add(new MobSpawnInfo.Spawners(ZombiesRegistry.CHESTHEAD.get(), spawnWeightTough, minGroupTough, maxGroupTough));
 
                         /* Add frozen lumberjacks spawn */
                         if (biomeTypes.stream().anyMatch(lumberjackList::contains)){
