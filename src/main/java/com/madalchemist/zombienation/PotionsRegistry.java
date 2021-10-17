@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation;
 
+import com.madalchemist.zombienation.potions.PotionModdedOnFire;
 import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
@@ -11,6 +12,8 @@ public class PotionsRegistry
 {
     @ObjectHolder("zombienation:zombie_virus")
     public static final PotionZombieVirus POTION_ZOMBIE_VIRUS = null;
+    //@ObjectHolder("zombienation:modded_onfire")
+    //public static final PotionModdedOnFire POTION_MODDED_ONFIRE = null;
 
     public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> makeRegistryObject(final ResourceLocation location, IForgeRegistry<T> registry)
     {
