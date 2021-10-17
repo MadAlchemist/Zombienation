@@ -1,0 +1,12 @@
+{
+  "minVersion": "0.7.11",
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.madalchemist.zombienation.mixin",
+  "refmap": "mixins.zombienation.refmap.json",
+  "mixins": [
+    "MixinZombieEntity"
+  ],
+  "client": [],
+  "server": []
+}
+
