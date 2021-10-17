@@ -29,3 +29,9 @@ Version 1.16.5-1.0.4.0
 * Brown bears gain Regeneration I for 10 seconds from killing zombies
 * Zombies now attack horses
 * Vanilla zombies and villagers are now immune to sun
+(forgot to list some changes)
+17.10.2021
+* Added chesthead
+* Reduced zombie ambient volume
+* Added german translation
+* "Zombies not burn in sun" feature rewritten from scratch
