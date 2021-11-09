@@ -1,6 +1,9 @@
 package com.madalchemist.zombienation.animals;
 
+import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.ZombiesRegistry;
+import com.madalchemist.zombienation.zombies.LootHelper;
+import com.madalchemist.zombienation.zombies.Zombie1;
 import com.madalchemist.zombienation.zombies.ZombieBear;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,6 +34,9 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -39,6 +45,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+@Mod.EventBusSubscriber(modid = "zombienation")
 public class BrownBearEntity extends PolarBearEntity {
    private static final DataParameter<Boolean> DATA_STANDING_ID = EntityDataManager.defineId(BrownBearEntity.class, DataSerializers.BOOLEAN);
    private float clientSideStandAnimationO;
@@ -309,6 +316,15 @@ public class BrownBearEntity extends PolarBearEntity {
 
       public boolean canUse() {
          return !BrownBearEntity.this.isBaby() && !BrownBearEntity.this.isOnFire() ? false : super.canUse();
+      }
+   }
+
+   @SubscribeEvent
+   public static void onDeath(LivingDeathEvent death) {
+      if(death.getEntityLiving() instanceof Zombie1) {
+         LootHelper.dropLoot(ConfigHandler.LOOT.brown_bear_loot.get(),
+                 ConfigHandler.LOOT.brown_bear_drop_chance.get(),
+                 death.getEntityLiving());
       }
    }
 }
