@@ -94,9 +94,9 @@ public class Chesthead extends ZombieEntity {
     }
 
     private static ItemStack getRandomLoot() {
-        int max_index =  ConfigHandler.GENERAL.chestheadLoot.get().size()-1;
+        int max_index =  ConfigHandler.LOOT.chestheadLoot.get().size()-1;
         int index = (int)Math.round(Math.random()*max_index);
-        String id = ConfigHandler.GENERAL.chestheadLoot.get().get(index);
+        String id = ConfigHandler.LOOT.chestheadLoot.get().get(index);
         String id_parts[] = id.split(":");
         if(id_parts.length <= 1 || id_parts.length > 3) { return ItemStack.EMPTY; }
         return(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(id_parts[0], id_parts[1])),1));
