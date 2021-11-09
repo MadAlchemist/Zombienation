@@ -42,5 +42,8 @@
   "itemGroup.zombienation": "Zombienation",
 
   "item.zombienation.chesthead_spawn_egg":"Яйцо призыва зомби с сундуком на голове",
-  "entity.zombienation.chesthead": "Зомби"
+  "entity.zombienation.chesthead": "Зомби",
+
+  "item.zombienation.zombie_dolphin_spawn_egg":"Яйцо призыва зомби-дельфина",
+  "entity.zombienation.zombie_dolphin": "Зомби-дельфин"
 }
