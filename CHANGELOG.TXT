@@ -35,3 +35,6 @@ Version 1.16.5-1.0.4.0
 * Reduced zombie ambient volume
 * Added german translation
 * "Zombies not burn in sun" feature rewritten from scratch
+09.11.2021
+* Added zombie dolphin
+* Zombies now are attracted by block placement, block breaking, anvil usage, note blocks and explosions.
