@@ -14,6 +14,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 
 public class Zombie2 extends ZombieEntity {
@@ -49,5 +51,14 @@ public class Zombie2 extends ZombieEntity {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBearEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, HorseEntity.class, true));
+    }
+
+    @SubscribeEvent
+    public static void onDeath(LivingDeathEvent death) {
+        if(death.getEntityLiving() instanceof Zombie1) {
+            LootHelper.dropLoot(ConfigHandler.LOOT.zombie1_loot.get(),
+                    ConfigHandler.LOOT.zombie1_drop_chance.get(),
+                    death.getEntityLiving());
+        }
     }
 }
