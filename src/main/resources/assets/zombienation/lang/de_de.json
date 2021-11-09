@@ -42,5 +42,8 @@
   "itemGroup.zombienation": "Zombienation",
 
   "item.zombienation.chesthead_spawn_egg":"Erschaffe Zombie mit Kopfкasten",
-  "entity.zombienation.chesthead": "Zombie"
+  "entity.zombienation.chesthead": "Zombie",
+
+  "item.zombienation.zombie_dolphin_spawn_egg":"Erschaffe Zombie delfin",
+  "entity.zombienation.zombie_dolphin": "Zombie delfin"
 }
