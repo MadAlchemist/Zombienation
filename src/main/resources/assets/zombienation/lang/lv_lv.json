@@ -42,5 +42,8 @@
   "itemGroup.zombienation": "Zombienation",
 
   "item.zombienation.chesthead_spawn_egg":"Zombija ar kasti uz galvas radīšanas ola",
-  "entity.zombienation.chesthead": "Zombijs"
+  "entity.zombienation.chesthead": "Zombijs",
+
+  "item.zombienation.zombie_dolphin_spawn_egg":"Delfīna zombija radīšanas ola",
+  "entity.zombienation.zombie_dolphin": "Delfīns zombijs"
 }
