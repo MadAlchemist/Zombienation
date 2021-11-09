@@ -7,9 +7,13 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
@@ -57,6 +61,20 @@ public class EventsHandler {
             if(ConfigHandler.GENERAL.minersHavePickaxes.get()) {
                 zombie.equipItemIfPossible(pickaxe);
             }
+        }
+
+        if(event.getEntity() instanceof DrownedEntity) {
+            DrownedEntity drowned = (DrownedEntity) event.getEntity();
+            drowned.targetSelector.addGoal(2, new ModdedNearestAttackableTargetGoal<>((DrownedEntity)event.getEntity(), DolphinEntity.class, true));
+        }
+
+        if(event.getEntity() instanceof DolphinEntity) {
+            DolphinEntity dolphin = (DolphinEntity) event.getEntity();
+            if(!(event.getEntity() instanceof ZolphinEntity)){
+                dolphin.targetSelector.addGoal(2, new ModdedNearestAttackableTargetGoal<>((DolphinEntity) event.getEntity(), ZombieEntity.class, true));
+                dolphin.targetSelector.addGoal(2, new ModdedNearestAttackableTargetGoal<>((DolphinEntity) event.getEntity(), ZolphinEntity.class, true));
+            }
+            dolphin.goalSelector.addGoal(2, new MeleeAttackGoal(dolphin, (double)1.2F, true));
         }
 
         /* Is this a Zombie Warrior? */
@@ -115,7 +133,9 @@ public class EventsHandler {
             }
         }
         /* Is damage source a zombie ? */
-        if (event.getSource().getEntity() instanceof ZombieEntity) {
+        if (event.getSource().getEntity() instanceof ZombieEntity ||
+            event.getSource().getEntity() instanceof ZombieBear ||
+            event.getSource().getEntity() instanceof ZolphinEntity) {
             /* Is target infectable? */
             if (isInfectable(event.getEntity())) {
                 double d = Math.random();
@@ -165,7 +185,8 @@ public class EventsHandler {
            entity instanceof PolarBearEntity ||
            entity instanceof BrownBearEntity ||
            entity instanceof WolfEntity ||
-           entity instanceof HorseEntity) {
+           entity instanceof HorseEntity ||
+           entity instanceof DolphinEntity) {
             return true;
         } else {
             return false;
@@ -180,6 +201,14 @@ public class EventsHandler {
                 ZombieBear zombear = new ZombieBear(ZombiesRegistry.ZOMBIE_BEAR.get(), event.getEntity().level);
                 zombear.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                 event.getEntity().level.addFreshEntity(zombear);
+            }
+        }
+        //If dies infected dolphin, spawn zolphin
+        if (event.getEntity() instanceof DolphinEntity) {
+            if(((DolphinEntity) event.getEntity()).hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS)) {
+                ZolphinEntity zolphin = new ZolphinEntity(ZombiesRegistry.ZOLPHIN.get(), event.getEntity().level);
+                zolphin.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                event.getEntity().level.addFreshEntity(zolphin);
             }
         }
 
