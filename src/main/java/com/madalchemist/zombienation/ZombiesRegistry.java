@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -43,6 +44,7 @@ public class ZombiesRegistry {
     //public static final RegistryObject<EntityType<Cyberzombie>> CYBERZOMBIE = createEntity("cyberzombie", Cyberzombie::new, 0.8F, 1.95F, 0x000000, 0x0000ff);
     public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD = createEntity("chesthead", Chesthead::new, 0.8F, 1.95F, 0x553355, 0x224488);
     public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR = createEntity("zombie_bear", ZombieBear::new, 1.3F, 1.4F, 0x558855, 0x55ff55);
+    public static final RegistryObject<EntityType<ZolphinEntity>> ZOLPHIN = createWaterEntity("zombie_dolphin", false, ZolphinEntity::new, 1.3F, 1.4F, 0x228822, 0x222288);
 
     public static final RegistryObject<EntityType<BrownBearEntity>> BROWN_BEAR = createEntity("brown_bear", false, BrownBearEntity::new, 1.3F, 1.4F, 0x854505, 0x000000);
 
@@ -68,6 +70,22 @@ public class ZombiesRegistry {
         return ENTITY_DEFERRED.register(name, () -> entity);
     }
 
+    private static <T extends WaterMobEntity> RegistryObject<EntityType<T>> createWaterEntity(String name, boolean isMonster, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+        ResourceLocation location = new ResourceLocation("zombienation", name);
+        EntityType<T> entity;
+        if(!isMonster) {
+            entity = EntityType.Builder.of(factory, EntityClassification.WATER_CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
+        } else {
+            entity = EntityType.Builder.of(factory, EntityClassification.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
+        }
+        entities.add(entity);
+        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(Zombienation.CREATIVE_TAB));
+        spawnEgg.setRegistryName(new ResourceLocation("zombienation", name + "_spawn_egg"));
+        SPAWN_EGGS.add(spawnEgg);
+
+        return ENTITY_DEFERRED.register(name, () -> entity);
+    }
+
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(ZOMBIE_1.get(), Zombie1.createAttributes().build());
@@ -82,6 +100,7 @@ public class ZombiesRegistry {
         event.put(CHESTHEAD.get(), Chesthead.createAttributes().build());
         event.put(BROWN_BEAR.get(), BrownBearEntity.createAttributes().build());
         event.put(ZOMBIE_BEAR.get(), ZombieBear.createAttributes().build());
+        event.put(ZOLPHIN.get(), ZolphinEntity.createAttributes().build());
         //event.put(CYBERZOMBIE.get(), Cyberzombie.createAttributes().build());
     }
 
