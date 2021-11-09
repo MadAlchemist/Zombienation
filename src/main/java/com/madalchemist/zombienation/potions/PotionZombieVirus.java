@@ -7,6 +7,7 @@ import com.madalchemist.zombienation.animals.BrownBearEntity;
 import com.madalchemist.zombienation.items.ItemAntizombine;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
@@ -45,7 +46,7 @@ public class PotionZombieVirus extends Effect {
                 entity.addEffect(new EffectInstance(Effects.WEAKNESS, 200, 0, false, false));
         }
         // Animals don't die from virus itself, but are very vulnerable due to poisoning.
-        if(entity instanceof PolarBearEntity || entity instanceof BrownBearEntity || entity instanceof HorseEntity || entity instanceof WolfEntity) {
+        if(entity instanceof PolarBearEntity || entity instanceof BrownBearEntity || entity instanceof HorseEntity || entity instanceof WolfEntity || entity instanceof DolphinEntity) {
             if (!entity.hasEffect(Effects.POISON) && Math.random() <= 0.000167819)
                 entity.addEffect(new EffectInstance(Effects.POISON, 40, 0, false, false));
         }
@@ -55,7 +56,8 @@ public class PotionZombieVirus extends Effect {
            entity instanceof PolarBearEntity ||
            entity instanceof BrownBearEntity ||
            entity instanceof HorseEntity ||
-           entity instanceof WolfEntity) {
+           entity instanceof WolfEntity ||
+           entity instanceof DolphinEntity) {
             if(entity.hasEffect(Effects.WEAKNESS) && entity.hasEffect(Effects.DAMAGE_BOOST)) {
                 if(!entity.level.isClientSide()) {
                     entity.removeEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS);
