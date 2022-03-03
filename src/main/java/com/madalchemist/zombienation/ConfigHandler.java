@@ -148,6 +148,8 @@ public class ConfigHandler {
         public final ForgeConfigSpec.BooleanValue warriorsHaveSwords;
         public final ForgeConfigSpec.BooleanValue minersHavePickaxes;
         public final ForgeConfigSpec.BooleanValue hazmatSuitProtectsFromPotions;
+        public final ForgeConfigSpec.BooleanValue feralMode;
+        public final ForgeConfigSpec.BooleanValue creeperProtection;
 
         General(ForgeConfigSpec.Builder builder) {
             builder.push("General");
@@ -163,7 +165,12 @@ public class ConfigHandler {
             hazmatSuitProtectsFromPotions = builder
                     .comment("Are hazmat zombies immune to potions?")
                     .define("hazmatSuitProtectsFromPotions", true);
-
+            feralMode = builder
+                    .comment("Should zombies attack everything except undead?")
+                    .define("feralMode", false);
+            creeperProtection = builder
+                    .comment("Prevent creepers from blowing up zombies? Useful when feralMode is on.")
+                    .define("creeperProtection", false);
             builder.pop();
         }
 

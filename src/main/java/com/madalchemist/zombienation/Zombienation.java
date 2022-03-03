@@ -3,7 +3,7 @@ package com.madalchemist.zombienation;
 import com.madalchemist.zombienation.animals.BrownBearRenderer;
 import com.madalchemist.zombienation.potions.AntizombineRecipe;
 import com.madalchemist.zombienation.potions.PotionZombieVirus;
-import com.madalchemist.zombienation.zombies.*;
+import com.madalchemist.zombienation.zombies.render.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;

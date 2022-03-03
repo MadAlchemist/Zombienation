@@ -1,5 +1,6 @@
-package com.madalchemist.zombienation.zombies;
+package com.madalchemist.zombienation.zombies.render;
 
+import com.madalchemist.zombienation.zombies.Zombie4;
 import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;

@@ -3,8 +3,10 @@ package com.madalchemist.zombienation.zombies;
 import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.SoundsRegistry;
 import com.madalchemist.zombienation.animals.BrownBearEntity;
+import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
@@ -52,6 +54,7 @@ public class Zombie9 extends ZombieEntity {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBearEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, HorseEntity.class, true));
+        this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
     }
 
     @SubscribeEvent

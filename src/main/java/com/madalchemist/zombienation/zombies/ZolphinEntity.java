@@ -1,8 +1,9 @@
 package com.madalchemist.zombienation.zombies;
 
+import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
+import com.madalchemist.zombienation.zombies.ai.ModdedNearestAttackableTargetGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.SquidEntity;
@@ -30,5 +31,6 @@ public class ZolphinEntity extends DolphinEntity {
       this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
       this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SquidEntity.class, true));
       this.targetSelector.addGoal(2, new ModdedNearestAttackableTargetGoal<>(this, AbstractFishEntity.class, true));
+      this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
    }
 }

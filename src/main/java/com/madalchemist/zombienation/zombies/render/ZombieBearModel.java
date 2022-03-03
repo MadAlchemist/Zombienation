@@ -1,5 +1,6 @@
-package com.madalchemist.zombienation.zombies;
+package com.madalchemist.zombienation.zombies.render;
 
+import com.madalchemist.zombienation.zombies.ZombieBear;
 import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.passive.PolarBearEntity;

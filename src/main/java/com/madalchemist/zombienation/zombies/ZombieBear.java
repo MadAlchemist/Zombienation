@@ -2,6 +2,8 @@ package com.madalchemist.zombienation.zombies;
 
 import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.animals.BrownBearEntity;
+import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
+import com.madalchemist.zombienation.zombies.ai.ModdedNearestAttackableTargetGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -57,6 +59,7 @@ public class ZombieBear extends MonsterEntity {
       this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
       this.targetSelector.addGoal(3, new ModdedNearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
       this.targetSelector.addGoal(4, new ModdedNearestAttackableTargetGoal<>(this, FoxEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
+      this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
    }
 
    public static AttributeModifierMap.MutableAttribute createAttributes() {

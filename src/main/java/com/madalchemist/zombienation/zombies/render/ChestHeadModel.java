@@ -1,4 +1,4 @@
-package com.madalchemist.zombienation.zombies;
+package com.madalchemist.zombienation.zombies.render;
 
 import net.minecraft.client.renderer.entity.model.AbstractZombieModel;
 import net.minecraft.client.renderer.entity.model.ZombieModel;

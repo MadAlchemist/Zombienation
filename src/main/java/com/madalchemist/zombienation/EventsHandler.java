@@ -1,18 +1,23 @@
 package com.madalchemist.zombienation;
 
 import com.madalchemist.zombienation.animals.BrownBearEntity;
-import com.madalchemist.zombienation.potions.PotionZombieVirus;
 import com.madalchemist.zombienation.zombies.*;
+import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
+import com.madalchemist.zombienation.zombies.ai.ModdedNearestAttackableTargetGoal;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.CreeperSwellGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.WolfEntity;
@@ -27,7 +32,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -66,6 +70,16 @@ public class EventsHandler {
         if(event.getEntity() instanceof DrownedEntity) {
             DrownedEntity drowned = (DrownedEntity) event.getEntity();
             drowned.targetSelector.addGoal(2, new ModdedNearestAttackableTargetGoal<>((DrownedEntity)event.getEntity(), DolphinEntity.class, true));
+        }
+
+        if(event.getEntity() instanceof CreeperEntity) {
+            CreeperEntity creeper = (CreeperEntity) event.getEntity();
+            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, ZombieEntity.class, 6.0F, 1.0D, 1.2D));
+        }
+
+        if(event.getEntity().getClass().equals(ZombieEntity.class) || event.getEntity().getClass().equals(ZombieVillagerEntity.class)) {
+            ZombieEntity zombie = (ZombieEntity) event.getEntity();
+            zombie.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(zombie, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
         }
 
         if(event.getEntity() instanceof DolphinEntity) {
@@ -154,6 +168,17 @@ public class EventsHandler {
                    ZombieEntity zombie = (ZombieEntity)event.getSource().getEntity();
                    event.setCanceled(true);
                    entity.hurt(DamageSource.GENERIC, 0.1f);
+            }
+            if(event.getEntity() instanceof CreeperEntity &&
+                    (event.getSource().getEntity() instanceof ZombieEntity ||
+                    event.getSource().getEntity() instanceof ZombieBear ||
+                    event.getSource().getEntity() instanceof ZolphinEntity)) {
+                CreeperEntity creeper = (CreeperEntity) event.getEntity();
+                if(ConfigHandler.GENERAL.creeperProtection.get()) {
+                    creeper.addEffect(new EffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigHandler.INFECTION.infectionDuration.get() * 20, (int) 0, true, (false)));
+                    creeper.hurt(DamageSource.WITHER, 1.0f);
+                    event.setCanceled(true);
+                }
             }
         }
 

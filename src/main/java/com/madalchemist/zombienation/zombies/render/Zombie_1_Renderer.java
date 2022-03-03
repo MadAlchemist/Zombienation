@@ -1,5 +1,6 @@
-package com.madalchemist.zombienation.zombies;
+package com.madalchemist.zombienation.zombies.render;
 
+import com.madalchemist.zombienation.zombies.Zombie1;
 import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;
@@ -13,9 +14,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class Zombie_8_Renderer extends AbstractZombieRenderer<Zombie8,ZombieModel<Zombie8>> {
+public class Zombie_1_Renderer extends AbstractZombieRenderer<Zombie1,ZombieModel<Zombie1>> {
 
-    public Zombie_8_Renderer(EntityRendererManager rendererManager) {
+    public Zombie_1_Renderer(EntityRendererManager rendererManager) {
         super(rendererManager,
               new ZombieModel<>(0.0f, false),
               new ZombieModel<>(0.5f, true),
@@ -26,8 +27,8 @@ public class Zombie_8_Renderer extends AbstractZombieRenderer<Zombie8,ZombieMode
     }
 
     @Nonnull
-    public ResourceLocation getTextureLocation(@Nonnull Zombie8 zombie) {
-        return this.getTexture("zombie_girl_3");
+    public ResourceLocation getTextureLocation(@Nonnull Zombie1 zombie) {
+        return this.getTexture("zombie_steve");
     }
 
     private ResourceLocation getTexture(String fileName) {

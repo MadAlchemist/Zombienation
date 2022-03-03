@@ -1,8 +1,10 @@
-package com.madalchemist.zombienation.zombies;
+package com.madalchemist.zombienation.zombies.ai;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
+
+import com.madalchemist.zombienation.zombies.ZolphinEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
