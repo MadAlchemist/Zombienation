@@ -46,6 +46,28 @@ public class EventsHandler {
             ((ZombieEntity)event.getEntity()).setBaby(false);
         }
 
+        /* Named zombie effects */
+        if(event.getEntity() instanceof ZombieEntity && event.getEntity().hasCustomName()){
+            // Heisenberg from lab under cactus farm
+            if(event.getEntity().getCustomName().getString().equals("Heisenberg")) {
+                ((ZombieEntity) event.getEntity()).removeAllEffects(); //Removing effects
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.WEAKNESS, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.HeisenbergWeaknessValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.HeisenbergRegenValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.HeisenbergSpeedValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.HeisenbergResistanceValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.HeisenbergHealthBoostValue.get(), (false), (false)));
+            }
+            // Prickie from cactus farm
+            if(event.getEntity().getCustomName().getString().equals("Pricky")) {
+                ((ZombieEntity) event.getEntity()).removeAllEffects(); //Removing effects
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.PrickyStrengthValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.REGENERATION, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.PrickyRegenValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.PrickySlownessValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.PrickyResistanceValue.get(), (false), (false)));
+                ((ZombieEntity) event.getEntity()).addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, ConfigHandler.NAMED_ZOMBIES.PrickyHealthBoostValue.get(), (false), (false)));
+            }
+        }
+
         /* Is it a Zombie Miner? */
         if (event.getEntity().getClass() == Zombie3.class) {
             Zombie3 zombie = (Zombie3) event.getEntity();
@@ -153,7 +175,7 @@ public class EventsHandler {
             /* Is target infectable? */
             if (isInfectable(event.getEntity())) {
                 double d = Math.random();
-                if (d <= ConfigHandler.INFECTION.infectionChance.get()) {
+                if (d <= ConfigHandler.INFECTION.infectionChance.get() || (event.getEntity().hasCustomName() && event.getEntity().getCustomName().getString().equals("Heisenberg"))) {
                     /* Is entity already infected? */
                     if(!event.getEntityLiving().hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS.getEffect())) {
                         event.getEntityLiving().addEffect(new EffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigHandler.INFECTION.infectionDuration.get() * 20, (int) 0, true, (false)));

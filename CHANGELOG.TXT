@@ -1,3 +1,15 @@
+31.03.2022
+Version 1.16.5-1.0.8.0
+* Added cactus farm structure;
+* Added Heisenberg - hazmat zombie with special buff/debuff combo that always infects;
+* Added Pricky - zombie villager with special buff/debuff combo that can insta-gib most players;
+* Added composite bricks. Alloy of netherrack and end stone (uncraftable at this moment), is really
+  hard to break even with netherite pickaxe but can be blown up.
+* Added netherite door. Not craftable. Requires redstone but not works (intentionally!) if has slime block buried below.
+  Can be blown up if necessary, but is as hard to break manually as composite bricks;
+* Added random zombie spawn egg, useful to create all-in-one spawners;
+* (hopefully) fixed ArrayIndexOutOfBounds crash on chesthead deaths;
+
 03.03.2022
 Version 1.16.5-1.0.6.0
 * Added feral mode - zombies will attack ALL non-undead entities

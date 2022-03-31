@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "zombienation:block/composite_bricks"
+    }
+  }
+}

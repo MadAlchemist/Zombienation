@@ -45,5 +45,13 @@
   "entity.zombienation.chesthead": "Zombijs",
 
   "item.zombienation.zombie_dolphin_spawn_egg":"Delfīna zombija radīšanas ola",
-  "entity.zombienation.zombie_dolphin": "Delfīns zombijs"
+  "entity.zombienation.zombie_dolphin": "Delfīns zombijs",
+
+  "item.zombienation.random_zombie_spawn_egg":"Nejauša zombija radīšanas ola",
+  "entity.zombienation.random_zombie": "Nejaušais zombijs",
+
+  "item.zombienation.composite_bricks": "Kompozīta ķieģeļi",
+  "block.zombienation.composite_bricks": "Kompozīta ķieģeļi",
+  "item.zombienation.netherite_door": "Nezerīta durvis",
+  "block.zombienation.netherite_door": "Nezerīta durvis"
 }

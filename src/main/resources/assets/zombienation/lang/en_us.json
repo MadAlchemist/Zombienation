@@ -45,5 +45,13 @@
   "entity.zombienation.chesthead": "Zombie",
 
   "item.zombienation.zombie_dolphin_spawn_egg":"Zombie dolphin spawn egg",
-  "entity.zombienation.zombie_dolphin": "Zombie dolphin"
+  "entity.zombienation.zombie_dolphin": "Zombie dolphin",
+
+  "item.zombienation.random_zombie_spawn_egg":"Random zombie spawn egg",
+  "entity.zombienation.random_zombie": "Random zombie",
+
+  "item.zombienation.composite_bricks": "Composite bricks",
+  "block.zombienation.composite_bricks": "Composite bricks",
+  "item.zombienation.netherite_door": "Netherite door",
+  "block.zombienation.netherite_door": "Netherite door"
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_rh",
+  "textures": {
+    "top": "zombienation:blocks/netherite_door_top",
+    "bottom": "zombienation:blocks/netherite_door_bottom"
+  }
+}

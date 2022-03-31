@@ -45,5 +45,13 @@
   "entity.zombienation.chesthead": "Zombie",
 
   "item.zombienation.zombie_dolphin_spawn_egg":"Erschaffe Zombie delfin",
-  "entity.zombienation.zombie_dolphin": "Zombie delfin"
+  "entity.zombienation.zombie_dolphin": "Zombie delfin",
+
+  "item.zombienation.random_zombie_spawn_egg":"Erschaffe random Zombie",
+  "entity.zombienation.random_zombie": "random Zombie",
+
+  "item.zombienation.composite_bricks": "zusammengesetzte ziegel",
+  "block.zombienation.composite_bricks": "zusammengesetzte ziegel",
+  "item.zombienation.netherite_door": "Netherittür",
+  "block.zombienation.netherite_door": "Netherittür"
 }
