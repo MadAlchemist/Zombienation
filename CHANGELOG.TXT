@@ -1,3 +1,15 @@
+05.04.2022
+Version 1.16.5-1.0.8.1
+* Added option to replace skeletons in overworld with zombies;
+* Random zombies never turn into chestheads anymore;
+* Random zombies now turn into zombie villagers sometimes;
+* Random zombies turn into frozen lumberjacks only in snowy biomes;
+* All modded zombies now drop something useful instead of rotten flesh by default;
+* Chestheads by default drop rotten flesh and oak planks;
+* Reduced buffs on miners & warriors by 1;
+* Tough zombie buffs now are removed and re-applied on world load, to prevent effect accumulation;
+* Zombie senses now are somewhat pre-configured by default;
+
 31.03.2022
 Version 1.16.5-1.0.8.0
 * Added cactus farm structure;

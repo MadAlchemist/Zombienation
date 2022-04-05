@@ -10,18 +10,24 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Random;
 
@@ -45,11 +51,11 @@ public class RandomZombie extends ZombieEntity {
     @Override
     public void tick() {
         Random rand = new Random();
-        int z_type = rand.nextInt(10);
+        int z_type = rand.nextInt(11);
 
         switch(z_type) {
             case 0:
-                Chesthead zombie = new Chesthead(ZombiesRegistry.CHESTHEAD.get(), this.level);
+                ZombieEntity zombie = new ZombieEntity(EntityType.ZOMBIE, this.level);
                 zombie.setPos(this.getX(), this.getY(), this.getZ());
                 this.level.addFreshEntity(zombie);
                 this.remove();
@@ -112,9 +118,30 @@ public class RandomZombie extends ZombieEntity {
                 break;
 
             case 9:
-                Zombie9 zombie9 = new Zombie9(ZombiesRegistry.ZOMBIE_9.get(), this.level);
+                RegistryKey<Biome> biomeKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, this.level.getBiome(new BlockPos(this.getX(),this.getY(),this.getZ())).getRegistryName());
+                if(BiomeDictionary.hasType(biomeKey,BiomeDictionary.Type.SNOWY)) {
+
+                /*
+                    Zombie9 zombie9 = new Zombie9(ZombiesRegistry.ZOMBIE_9.get(), this.level);
+
                 zombie9.setPos(this.getX(), this.getY(), this.getZ());
                 this.level.addFreshEntity(zombie9);
+                this.remove();
+                */
+                } else
+                {
+                    HuskEntity husk = new HuskEntity(EntityType.HUSK, this.level);
+                    husk.setPos(this.getX(), this.getY(), this.getZ());
+                    this.level.addFreshEntity(husk);
+                    this.remove();
+                    break;
+                }
+                break;
+
+            case 10:
+                ZombieVillagerEntity zombievillager = new ZombieVillagerEntity(EntityType.ZOMBIE_VILLAGER, this.level);
+                zombievillager.setPos(this.getX(), this.getY(), this.getZ());
+                this.level.addFreshEntity(zombievillager);
                 this.remove();
                 break;
         }

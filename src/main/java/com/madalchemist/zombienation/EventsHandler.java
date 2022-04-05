@@ -13,14 +13,8 @@ import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.CreeperSwellGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.monster.CreeperEntity;
-import net.minecraft.entity.monster.DrownedEntity;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.monster.ZombieVillagerEntity;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.passive.DolphinEntity;
-import net.minecraft.entity.passive.PolarBearEntity;
-import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.passive.horse.ZombieHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.Level;
 
 @Mod.EventBusSubscriber(modid = "zombienation")
 public class EventsHandler {
@@ -44,7 +39,30 @@ public class EventsHandler {
         if(event.getEntity().getClass().getSuperclass() == ZombieEntity.class) {
             /* All modded zombies are adults */
             ((ZombieEntity)event.getEntity()).setBaby(false);
+            /* And no adult zombies ride chickens! */
+            if(((ZombieEntity)event.getEntity()).getVehicle() != null) {
+                if(((ZombieEntity)event.getEntity()).getVehicle() instanceof ChickenEntity) {
+                    ((ZombieEntity)event.getEntity()).getVehicle().hurt(DamageSource.GENERIC, 1000f);
+                }
+            }
         }
+
+        /* Replace skeletons with zombies? */
+
+        if(!event.getWorld().isClientSide()) {
+            if (ConfigHandler.GENERAL.noSkeletons.get()) {
+                if (event.getEntity() instanceof SkeletonEntity || event.getEntity() instanceof StrayEntity) {
+                    //Zombienation.LOGGER.printf(Level.INFO,"Skeleton dimension: %s", event.getWorld().dimension().location().toString());
+                    if (event.getWorld().dimension().location().toString().equals("minecraft:overworld")) {
+                        RandomZombie zombie = new RandomZombie(ZombiesRegistry.ZOMBIE_RANDOM.get(), event.getWorld());
+                        zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level.addFreshEntity(zombie);
+                        event.getEntity().remove();
+                    }
+                }
+            }
+        }
+
 
         /* Named zombie effects */
         if(event.getEntity() instanceof ZombieEntity && event.getEntity().hasCustomName()){
@@ -72,8 +90,9 @@ public class EventsHandler {
         if (event.getEntity().getClass() == Zombie3.class) {
             Zombie3 zombie = (Zombie3) event.getEntity();
             /* Zombie Miners are "tough" zombies, so add damage boost and health boost */
-            zombie.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
-            zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
+            zombie.removeAllEffects();
+            zombie.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
+            zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
             /* Create helmet and pickaxe */
             ItemStack helmet = new ItemStack(Items.IRON_HELMET);
             //helmet.enchant(Enchantments.VANISHING_CURSE, 1);
@@ -117,8 +136,9 @@ public class EventsHandler {
         if (event.getEntity().getClass() == Zombie4.class) {
             Zombie4 zombie = (Zombie4) event.getEntity();
             /* Zombie Warriors are "tough" zombies, so apply damage boost and health boost */
-            zombie.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
-            zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 3, (false), (false)));
+            zombie.removeAllEffects();
+            zombie.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
+            zombie.addEffect(new EffectInstance(Effects.HEALTH_BOOST, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
             /* Try to equip sword, if enabled */
             if(ConfigHandler.GENERAL.warriorsHaveSwords.get()) {
                 ItemStack sword = new ItemStack(Items.IRON_SWORD);
