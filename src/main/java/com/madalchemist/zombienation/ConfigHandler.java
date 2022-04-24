@@ -249,7 +249,7 @@ public class ConfigHandler {
                         .comment("Prevent creepers from blowing up zombies? Useful when feralMode is on.")
                         .define("creeperProtection", true);
                 noSkeletons = builder
-                        .comment("Replace all skeletons in overworld with random zombies?")
+                        .comment("Replace all skeletons in overworld with random zombies? CAUTION: VERY BUGGY, MAY BREAK WORLD, ESPECIALLY ON DEDICATED SERVER! ENABLE AT YOUR OWN RISK!")
                         .define("noSkeletons", false);
                 builder.pop();
             }

@@ -5,10 +5,7 @@ import com.madalchemist.zombienation.zombies.*;
 import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
 import com.madalchemist.zombienation.zombies.ai.ModdedNearestAttackableTargetGoal;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.CreeperSwellGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
@@ -22,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -49,18 +47,18 @@ public class EventsHandler {
 
         /* Replace skeletons with zombies? */
 
-        if(!event.getWorld().isClientSide()) {
-            if (ConfigHandler.GENERAL.noSkeletons.get()) {
+        if (ConfigHandler.GENERAL.noSkeletons.get()) {
+                //Zombienation.LOGGER.debug("Attempting to replace skeleton with zombie...");
                 if (event.getEntity() instanceof SkeletonEntity || event.getEntity() instanceof StrayEntity) {
-                    //Zombienation.LOGGER.printf(Level.INFO,"Skeleton dimension: %s", event.getWorld().dimension().location().toString());
-                    if (event.getWorld().dimension().location().toString().equals("minecraft:overworld")) {
-                        RandomZombie zombie = new RandomZombie(ZombiesRegistry.ZOMBIE_RANDOM.get(), event.getWorld());
+                    if (event.getEntity().level.dimension().location().toString().equals("minecraft:overworld")) {
+                        ZombieEntity zombie = new ZombieEntity(EntityType.ZOMBIE, event.getEntity().level);
                         zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level.addFreshEntity(zombie);
-                        event.getEntity().remove();
+                        event.setCanceled(true);
+                        //event.getEntity().remove();
+                        //Zombienation.LOGGER.debug("Done!");
                     }
                 }
-            }
         }
 
 
@@ -157,27 +155,11 @@ public class EventsHandler {
             zombie.addEffect(new EffectInstance(Effects.ABSORPTION, (int) Integer.MAX_VALUE, (int) 5, (false), (false)));
             zombie.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, (int) Integer.MAX_VALUE, (int) 2, (false), (false)));
         }
-
-        /* Is this a Cyberzombie? */
-        //if (event.getEntity() instanceof Cyberzombie) {
-        //    Cyberzombie zombie = (Cyberzombie) event.getEntity();
-        //    ItemStack helmet = new ItemStack(Items.NETHERITE_HELMET, 1);
-        //    ItemStack chest = new ItemStack(Items.NETHERITE_CHESTPLATE, 1);
-        //    ItemStack legs = new ItemStack(Items.NETHERITE_LEGGINGS, 1);
-        //    ItemStack boots = new ItemStack(Items.NETHERITE_BOOTS, 1);
-        //    //helmet.enchant(Enchantments.UNBREAKING, 100);
-        //    //chest.enchant(Enchantments.UNBREAKING, 100);
-        //    //legs.enchant(Enchantments.UNBREAKING, 100);
-        //    //boots.enchant(Enchantments.UNBREAKING, 100);
-        //    zombie.equipItemIfPossible(helmet);
-        //    zombie.equipItemIfPossible(chest);
-        //    zombie.equipItemIfPossible(legs);
-        //    zombie.equipItemIfPossible(boots);
-        //}
     }
 
     @SubscribeEvent
     public static void onAttack(LivingAttackEvent event) {
+
         /* Is this Hazmat Zombie? */
         if (event.getEntity() instanceof Zombie5) {
             /* Is damage source a potion? */
@@ -188,12 +170,28 @@ public class EventsHandler {
                 }
             }
         }
+
+        /* Is damage source an Enderman? */
+        if(event.getSource().getEntity() instanceof EndermanEntity) {
+            //Then deal extra damage to undead
+            if(event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD) {
+                event.getEntity().hurt(DamageSource.OUT_OF_WORLD, 10f);
+            }
+        }
+
         /* Is damage source a zombie ? */
         if (event.getSource().getEntity() instanceof ZombieEntity ||
             event.getSource().getEntity() instanceof ZombieBear ||
             event.getSource().getEntity() instanceof ZolphinEntity) {
-            /* Is target infectable? */
-            if (isInfectable(event.getEntity())) {
+
+            /* Is target an enderman? */
+            if(event.getEntityLiving() instanceof EndermanEntity) {
+                // Heal enderman, so that zombies almost never win this fight
+                event.getEntityLiving().heal(10f);
+            }
+
+            /* Is target infectable */
+            if (isInfectable(event.getEntity()) && !event.getEntityLiving().isBlocking()) {
                 double d = Math.random();
                 if (d <= ConfigHandler.INFECTION.infectionChance.get() || (event.getEntity().hasCustomName() && event.getEntity().getCustomName().getString().equals("Heisenberg"))) {
                     /* Is entity already infected? */
@@ -237,13 +235,6 @@ public class EventsHandler {
                 }
             }
         }
-        /*
-        if(event.getSource().isFire()) {
-            if(event.getEntityLiving() instanceof ZombieEntity) {
-                event.getEntityLiving().addEffect(new EffectInstance(PotionsRegistry.POTION_MODDED_ONFIRE, 1200, 2, false, false));
-            }
-        }
-        */
     }
 
     public static boolean isInfectable(Entity entity) {
@@ -262,6 +253,7 @@ public class EventsHandler {
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
+
         //If dies infected polar or brown bear, spawn zombie bear.
         if (event.getEntity() instanceof PolarBearEntity || event.getEntity() instanceof BrownBearEntity) {
             if(((PolarBearEntity) event.getEntity()).hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS)) {
@@ -299,27 +291,10 @@ public class EventsHandler {
             }
         }
     }
-/*
-    @SubscribeEvent
-    public static void onUpdate(LivingEvent.LivingUpdateEvent event) {
-        if(event.getEntityLiving() instanceof ZombieEntity) {
-            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava() && !event.getEntityLiving().hasEffect(PotionsRegistry.POTION_MODDED_ONFIRE)) {
-                if(!ConfigHandler.GENERAL.burnAtDay.get()) {
-                    event.getEntityLiving().clearFire();
-                }
-            }
-        }
-        if(event.getEntityLiving() instanceof ZombieVillagerEntity) {
-            if(event.getEntityLiving().isOnFire() && !event.getEntityLiving().isInLava() && !event.getEntityLiving().hasEffect(PotionsRegistry.POTION_MODDED_ONFIRE)) {
-                if(!ConfigHandler.GENERAL.burnAtDay.get()) {
-                    event.getEntityLiving().clearFire();
-                }
-            }
-        }
-    }
-*/
+
     @SubscribeEvent
     public static void onZombieVirusExpired(PotionEvent.PotionExpiryEvent event) {
+
         if(event.getPotionEffect().getEffect() == PotionsRegistry.POTION_ZOMBIE_VIRUS) {
             event.getEntity().hurt(DamageSource.WITHER, Float.MAX_VALUE);
             if(ConfigHandler.INFECTION.infectionDeathZombification.get()){

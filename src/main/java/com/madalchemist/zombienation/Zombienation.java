@@ -102,7 +102,6 @@ public class Zombienation
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_RANDOM.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.CHESTHEAD.get(), ChestHeadRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.BROWN_BEAR.get(), BrownBearRenderer::new);
-        //RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.CYBERZOMBIE.get(), Cyberzombie_Renderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOMBIE_BEAR.get(), ZombieBearRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombiesRegistry.ZOLPHIN.get(), ZolphinRenderer::new);
     }

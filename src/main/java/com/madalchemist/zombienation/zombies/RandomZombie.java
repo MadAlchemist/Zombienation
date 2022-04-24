@@ -2,6 +2,7 @@ package com.madalchemist.zombienation.zombies;
 
 import com.madalchemist.zombienation.ConfigHandler;
 import com.madalchemist.zombienation.SoundsRegistry;
+import com.madalchemist.zombienation.Zombienation;
 import com.madalchemist.zombienation.ZombiesRegistry;
 import com.madalchemist.zombienation.animals.BrownBearEntity;
 import com.madalchemist.zombienation.zombies.ai.FeralNearestAttackableTargetGoal;
@@ -121,13 +122,12 @@ public class RandomZombie extends ZombieEntity {
                 RegistryKey<Biome> biomeKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, this.level.getBiome(new BlockPos(this.getX(),this.getY(),this.getZ())).getRegistryName());
                 if(BiomeDictionary.hasType(biomeKey,BiomeDictionary.Type.SNOWY)) {
 
-                /*
+
                     Zombie9 zombie9 = new Zombie9(ZombiesRegistry.ZOMBIE_9.get(), this.level);
 
                 zombie9.setPos(this.getX(), this.getY(), this.getZ());
                 this.level.addFreshEntity(zombie9);
                 this.remove();
-                */
                 } else
                 {
                     HuskEntity husk = new HuskEntity(EntityType.HUSK, this.level);

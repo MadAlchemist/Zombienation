@@ -1,6 +1,9 @@
 05.04.2022
 Version 1.16.5-1.0.8.1
-* Added option to replace skeletons in overworld with zombies;
+* Zombie attacks don't infect if they are blocked by shield;
+* Cancelled any work on Cyberzombie and removed all traces of it from code :(
+* Added option to replace skeletons in overworld with zombies
+  (CAUTION: VERY BUGGY! MAY BREAK WORLD! ENABLE AT YOUR OWN RISK! ESPECIALLY ON DEDICATED SERVERS!);
 * Random zombies never turn into chestheads anymore;
 * Random zombies now turn into zombie villagers sometimes;
 * Random zombies turn into frozen lumberjacks only in snowy biomes;
@@ -9,6 +12,7 @@ Version 1.16.5-1.0.8.1
 * Reduced buffs on miners & warriors by 1;
 * Tough zombie buffs now are removed and re-applied on world load, to prevent effect accumulation;
 * Zombie senses now are somewhat pre-configured by default;
+* While zombies attack endermen in feral mode, they, in theory, should never win the fight;
 
 31.03.2022
 Version 1.16.5-1.0.8.0

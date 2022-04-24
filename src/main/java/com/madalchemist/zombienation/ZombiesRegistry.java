@@ -42,7 +42,6 @@ public class ZombiesRegistry {
     public static final RegistryObject<EntityType<Zombie8>> ZOMBIE_8 = createEntity("zombie_8", Zombie8::new, 0.8F, 1.95F, 0xff0000, 0x00ffff);
     public static final RegistryObject<EntityType<Zombie9>> ZOMBIE_9 = createEntity("zombie_9", Zombie9::new, 0.8F, 1.95F, 0x558855, 0x884488);
     public static final RegistryObject<EntityType<RandomZombie>> ZOMBIE_RANDOM = createEntity("random_zombie", RandomZombie::new, 0.8F, 1.95F, 0xffffff, 0x880055);
-    //public static final RegistryObject<EntityType<Cyberzombie>> CYBERZOMBIE = createEntity("cyberzombie", Cyberzombie::new, 0.8F, 1.95F, 0x000000, 0x0000ff);
     public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD = createEntity("chesthead", Chesthead::new, 0.8F, 1.95F, 0x553355, 0x224488);
     public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR = createEntity("zombie_bear", ZombieBear::new, 1.3F, 1.4F, 0x558855, 0x55ff55);
     public static final RegistryObject<EntityType<ZolphinEntity>> ZOLPHIN = createWaterEntity("zombie_dolphin", false, ZolphinEntity::new, 1.3F, 1.4F, 0x228822, 0x222288);
