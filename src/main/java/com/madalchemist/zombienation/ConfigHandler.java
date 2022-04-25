@@ -28,15 +28,25 @@ public class ConfigHandler {
     public static class Worldgen {
         public ForgeConfigSpec.IntValue cactusFarmMinDistance;
         public ForgeConfigSpec.IntValue cactusFarmAvgDistance;
+        public ForgeConfigSpec.IntValue cursedWellMinDistance;
+        public ForgeConfigSpec.IntValue cursedWellAvgDistance;
 
         Worldgen(ForgeConfigSpec.Builder builder) {
             builder.push("Worldgen");
+            /* Cactus farms */
             cactusFarmMinDistance = builder
                     .comment("Minimum distance between cactus farms (in chunks):")
                     .defineInRange("cactusFarmMinDistance", 16, 8, Integer.MAX_VALUE);
             cactusFarmAvgDistance = builder
                     .comment("Average distance between cactus farms (in chunks):")
                     .defineInRange("cactusFarmAvgDistance", 32, 8, Integer.MAX_VALUE);
+            /* Cursed wells */
+            cursedWellMinDistance = builder
+                    .comment("Minimum distance between cursed wells (in chunks):")
+                    .defineInRange("cursedWellMinDistance", 16, 8, Integer.MAX_VALUE);
+            cursedWellAvgDistance = builder
+                    .comment("Average distance between cursed wells (in chunks):")
+                    .defineInRange("cursedWellAvgDistance", 32, 8, Integer.MAX_VALUE);
             builder.pop();
         }
     }
@@ -249,7 +259,7 @@ public class ConfigHandler {
                         .comment("Prevent creepers from blowing up zombies? Useful when feralMode is on.")
                         .define("creeperProtection", true);
                 noSkeletons = builder
-                        .comment("Replace all skeletons in overworld with random zombies? CAUTION: VERY BUGGY, MAY BREAK WORLD, ESPECIALLY ON DEDICATED SERVER! ENABLE AT YOUR OWN RISK!")
+                        .comment("Replace all skeletons in overworld with random zombies?")
                         .define("noSkeletons", false);
                 builder.pop();
             }

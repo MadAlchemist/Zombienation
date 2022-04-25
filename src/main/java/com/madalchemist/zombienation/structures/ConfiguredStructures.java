@@ -13,6 +13,7 @@ public class ConfiguredStructures {
      * Static instance of our structure so we can reference it and add it to biomes easily.
      */
     public static StructureFeature<?, ?> CONFIGURED_CACTUS_FARM = Structures.CACTUS_FARM.get().configured(IFeatureConfig.NONE);
+    public static StructureFeature<?, ?> CONFIGURED_CURSED_WELL = Structures.CURSED_WELL.get().configured(IFeatureConfig.NONE);
 
     /**
      * Registers the configured structure which is what gets added to the biomes.
@@ -24,6 +25,7 @@ public class ConfiguredStructures {
     public static void registerConfiguredStructures() {
         Registry<StructureFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE;
         Registry.register(registry, new ResourceLocation(Zombienation.MODID, "configured_cactus_farm"), CONFIGURED_CACTUS_FARM);
+        Registry.register(registry, new ResourceLocation(Zombienation.MODID, "configured_cursed_well"), CONFIGURED_CURSED_WELL);
 
         /* Ok so, this part may be hard to grasp but basically, just add your structure to this to
         * prevent any sort of crash or issue with other mod's custom ChunkGenerators. If they use
@@ -41,5 +43,6 @@ public class ConfiguredStructures {
         * Requires AccessTransformer ( see resources/META-INF/accesstransformer.cfg )
         */
         FlatGenerationSettings.STRUCTURE_FEATURES.put(Structures.CACTUS_FARM.get(), CONFIGURED_CACTUS_FARM);
+        FlatGenerationSettings.STRUCTURE_FEATURES.put(Structures.CURSED_WELL.get(), CONFIGURED_CURSED_WELL);
     }
 }

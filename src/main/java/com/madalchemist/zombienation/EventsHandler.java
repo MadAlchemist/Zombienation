@@ -21,11 +21,15 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.concurrent.ThreadTaskExecutor;
+import net.minecraft.util.concurrent.TickDelayedTask;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.Level;
 
@@ -48,15 +52,13 @@ public class EventsHandler {
         /* Replace skeletons with zombies? */
 
         if (ConfigHandler.GENERAL.noSkeletons.get()) {
-                //Zombienation.LOGGER.debug("Attempting to replace skeleton with zombie...");
                 if (event.getEntity() instanceof SkeletonEntity || event.getEntity() instanceof StrayEntity) {
                     if (event.getEntity().level.dimension().location().toString().equals("minecraft:overworld")) {
                         ZombieEntity zombie = new ZombieEntity(EntityType.ZOMBIE, event.getEntity().level);
                         zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level.addFreshEntity(zombie);
                         event.setCanceled(true);
-                        //event.getEntity().remove();
-                        //Zombienation.LOGGER.debug("Done!");
+                        ThreadTaskExecutor<Runnable> executor = LogicalSidedProvider.WORKQUEUE.get(event.getWorld().isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
+                        executor.tell(new TickDelayedTask(0, () -> event.getWorld().addFreshEntity(zombie)));
                     }
                 }
         }

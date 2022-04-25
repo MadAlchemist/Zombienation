@@ -1,4 +1,11 @@
-05.04.2022
+25.04.2022
+Version 1.16.5-1.0.8.2
+* Enabling "noSkeletons" config option should now be safe;
+* Fixed unlikely, but possible server freezes with random zombies;
+* Added "cursed well" structure;
+
+
+24.04.2022
 Version 1.16.5-1.0.8.1
 * Zombie attacks don't infect if they are blocked by shield;
 * Cancelled any work on Cyberzombie and removed all traces of it from code :(

@@ -44,6 +44,7 @@ public class Structures {
      *   So it is best to keep your structure names the same as long as you can instead of changing them frequently.
      */
     public static final RegistryObject<Structure<NoFeatureConfig>> CACTUS_FARM = DEFERRED_REGISTRY_STRUCTURE.register("cactus_farm", () -> (new CactusFarmStructure(NoFeatureConfig.CODEC)));
+    public static final RegistryObject<Structure<NoFeatureConfig>> CURSED_WELL = DEFERRED_REGISTRY_STRUCTURE.register("cursed_well", () -> (new CursedWellStructure(NoFeatureConfig.CODEC)));
 
     /**
      * This is where we set the rarity of your structures and determine if land conforms to it.
@@ -55,6 +56,13 @@ public class Structures {
                 new StructureSeparationSettings(ConfigHandler.WORLDGEN.cactusFarmAvgDistance.get() /* average distance apart in chunks between spawn attempts */,
                         ConfigHandler.WORLDGEN.cactusFarmMinDistance.get() /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
                         1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
+                false);
+
+        setupMapSpacingAndLand(
+                CURSED_WELL.get(), /* The instance of the structure */
+                new StructureSeparationSettings(ConfigHandler.WORLDGEN.cursedWellAvgDistance.get() /* average distance apart in chunks between spawn attempts */,
+                        ConfigHandler.WORLDGEN.cursedWellMinDistance.get() /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
+                        92885606 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 false);
 
 

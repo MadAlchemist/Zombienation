@@ -136,10 +136,16 @@ public class Zombienation
          * RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()) to get the biome's
          * registrykey. Then that can be fed into the dictionary to get the biome's types.
          */
-        LOGGER.printf(Level.INFO, "BIOME OF CACTUS FARM: %s\n", event.getName().toString());
         if(event.getName().toString().equals("minecraft:desert") ||
            event.getName().toString().equals("minecraft:savanna")) {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_CACTUS_FARM);
+        }
+
+        if(event.getName().toString().equals("minecraft:plains") ||
+                event.getName().toString().equals("minecraft:sunflower_plains") ||
+                event.getName().toString().equals("minecraft:meadow")
+        ) {
+            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_CURSED_WELL);
         }
     }
 
@@ -192,9 +198,16 @@ public class Zombienation
              * already added your default structure spacing to some dimensions. You would need to override the spacing with .put(...)
              * And if you want to do dimension blacklisting, you need to remove the spacing entry entirely from the map below to prevent generation safely.
              */
-            Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
-            tempMap.putIfAbsent(Structures.CACTUS_FARM.get(), DimensionStructuresSettings.DEFAULTS.get(Structures.CACTUS_FARM.get()));
-            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+
+            /* Cactus farms */
+            Map<Structure<?>, StructureSeparationSettings> tempMapCactusFarm = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+            tempMapCactusFarm.putIfAbsent(Structures.CACTUS_FARM.get(), DimensionStructuresSettings.DEFAULTS.get(Structures.CACTUS_FARM.get()));
+            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMapCactusFarm;
+
+            /* Cursed wells */
+            Map<Structure<?>, StructureSeparationSettings> tempMapCursedWell = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+            tempMapCursedWell.putIfAbsent(Structures.CURSED_WELL.get(), DimensionStructuresSettings.DEFAULTS.get(Structures.CURSED_WELL.get()));
+            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMapCursedWell;
         }
     }
 }
