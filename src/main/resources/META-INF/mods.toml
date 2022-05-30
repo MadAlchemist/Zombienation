@@ -1,31 +1,35 @@
-modLoader="javafml" 
-loaderVersion="[34,)"
+modLoader="javafml"
+loaderVersion="[37,)"
 license="All rights reserved"
-
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 [[mods]]
 modId="zombienation"
-version="1.16.5-1.0.8.2"
+version="${file.jarVersion}"
 displayName="Zombienation"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/zombienation"
-authors="Mad Alchemist"
-credits="ewallee"
-description='''
-Do you think vanilla zombies are boring?
-This mod adds more zombies, with different faces, voices,
-and special abilities! More features coming soon!
-'''
 logoFile="logo.png"
-
+credits="https://www.curseforge.com/members/ewallee"
+authors="https://www.curseforge.com/members/mada1chem1st"
+description='''
+Do you think that vanilla zombies are boring and want experience more similar to real zombie apocalypse?
+Ok, now you will have it:
+* Multiple zombie variants with different skins and voices;
+* Some zombies have special abilities;
+* Zombies hear you when you perform certain activities;
+* Zombies not burn in sun;
+* And - the worst thing - they can infect players with ZOMBIE VIRUS!
+Also, you will encounter some structures infected by zombies, sometimes with boss-like ones.
+These structures may be dangerows to explore, but also rewarding.
+'''
 [[dependencies.zombienation]]
-    modId="forge" 
-    mandatory=true 
-    versionRange="[34,)"
+    modId="forge"
+    mandatory=true
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
-
 [[dependencies.zombienation]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5]"
+    versionRange="[1.17.1,1.18)"
     ordering="NONE"
     side="BOTH"
