@@ -4,32 +4,32 @@
   "language.code": "en_us",
   "author": "Mad Alchemist",
 
-  "item.zombienation.zombie_1_spawn_egg":"Zombie in short pants spawn egg",
-  "entity.zombienation.zombie_1":"Zombie",
+  "item.zombienation.zombie1_spawn_egg":"Zombie in short pants spawn egg",
+  "entity.zombienation.zombie1":"Zombie",
 
-  "item.zombienation.zombie_2_spawn_egg":"Husk with skin head spawn egg",
-  "entity.zombienation.zombie_2":"Zombie",
+  "item.zombienation.zombie2_spawn_egg":"Husk with skin head spawn egg",
+  "entity.zombienation.zombie2":"Zombie",
 
-  "item.zombienation.zombie_3_spawn_egg":"Zombie Miner spawn egg",
-  "entity.zombienation.zombie_3":"Zombie",
+  "item.zombienation.zombie3_spawn_egg":"Zombie Miner spawn egg",
+  "entity.zombienation.zombie3":"Zombie",
 
-  "item.zombienation.zombie_4_spawn_egg":"Zombie Warrior spawn egg",
-  "entity.zombienation.zombie_4":"Zombie",
+  "item.zombienation.zombie4_spawn_egg":"Zombie Warrior spawn egg",
+  "entity.zombienation.zombie4":"Zombie",
   
-  "item.zombienation.zombie_5_spawn_egg":"Hazmat Zombie spawn egg",
-  "entity.zombienation.zombie_5":"Zombie",
+  "item.zombienation.zombie5_spawn_egg":"Hazmat Zombie spawn egg",
+  "entity.zombienation.zombie5":"Zombie",
 
-  "item.zombienation.zombie_6_spawn_egg":"Zombie Alex spawn egg",
-  "entity.zombienation.zombie_6":"Zombie",
+  "item.zombienation.zombie6_spawn_egg":"Zombie Alex spawn egg",
+  "entity.zombienation.zombie6":"Zombie",
 
-  "item.zombienation.zombie_7_spawn_egg":"Husk girl spawn egg",
-  "entity.zombienation.zombie_7":"Zombie",
+  "item.zombienation.zombie7_spawn_egg":"Husk girl spawn egg",
+  "entity.zombienation.zombie7":"Zombie",
 
-  "item.zombienation.zombie_8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
-  "entity.zombienation.zombie_8":"Zombie",
+  "item.zombienation.zombie8_spawn_egg":"Zombie Girl with flowers on head spawn egg",
+  "entity.zombienation.zombie8":"Zombie",
 
-  "item.zombienation.zombie_9_spawn_egg":"Frozen Lumberjack spawn egg",
-  "entity.zombienation.zombie_9":"Zombie",
+  "item.zombienation.zombie9_spawn_egg":"Frozen Lumberjack spawn egg",
+  "entity.zombienation.zombie9":"Zombie",
 
   "item.zombienation.zombie_bear_spawn_egg":"Zombie bear spawn egg",
   "entity.zombienation.zombie_bear":"Zombie bear",

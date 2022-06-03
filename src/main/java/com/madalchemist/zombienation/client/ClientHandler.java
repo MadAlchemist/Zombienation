@@ -4,6 +4,7 @@ import com.madalchemist.zombienation.Zombienation;
 import com.madalchemist.zombienation.client.renderer.*;
 import com.madalchemist.zombienation.init.EntityRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,5 +28,6 @@ public class ClientHandler {
         event.registerEntityRenderer(EntityRegistry.ZOMBIE7.get(), ZombieRenderer7::new);
         event.registerEntityRenderer(EntityRegistry.ZOMBIE8.get(), ZombieRenderer8::new);
         event.registerEntityRenderer(EntityRegistry.ZOMBIE9.get(), ZombieRenderer9::new);
+        event.registerEntityRenderer(EntityRegistry.RANDOM_ZOMBIE.get(), ZombieRenderer::new);
     }
 }

@@ -4,32 +4,32 @@
   "language.code": "lv_lv",
   "author": "Mad Alchemist",
 
-  "item.zombienation.zombie_1_spawn_egg":"Zombija īsajās biksēs radīšanas ola",
-  "entity.zombienation.zombie_1":"Zombijs",
+  "item.zombienation.zombie1_spawn_egg":"Zombija īsajās biksēs radīšanas ola",
+  "entity.zombienation.zombie1":"Zombijs",
 
-  "item.zombienation.zombie_2_spawn_egg":"Huska ar pliku galvu radīšanas ola",
-  "entity.zombienation.zombie_2":"Zombijs",
+  "item.zombienation.zombie2_spawn_egg":"Huska ar pliku galvu radīšanas ola",
+  "entity.zombienation.zombie2":"Zombijs",
 
-  "item.zombienation.zombie_3_spawn_egg":"Zombija-kalnrača radīšanas ola",
-  "entity.zombienation.zombie_3":"Zombijs",
+  "item.zombienation.zombie3_spawn_egg":"Zombija-kalnrača radīšanas ola",
+  "entity.zombienation.zombie3":"Zombijs",
 
-  "item.zombienation.zombie_4_spawn_egg":"Zombija-kareivja radīšanas ola",
-  "entity.zombienation.zombie_4":"Zombijs",
+  "item.zombienation.zombie4_spawn_egg":"Zombija-kareivja radīšanas ola",
+  "entity.zombienation.zombie4":"Zombijs",
   
-  "item.zombienation.zombie_5_spawn_egg":"Zombija ķīmiskās aizsardzības terpā radīšanas ola",
-  "entity.zombienation.zombie_5":"Zombijs",
+  "item.zombienation.zombie5_spawn_egg":"Zombija ķīmiskās aizsardzības terpā radīšanas ola",
+  "entity.zombienation.zombie5":"Zombijs",
 
-  "item.zombienation.zombie_6_spawn_egg":"Zombija Aleksas radīšanas ola",
-  "entity.zombienation.zombie_6":"Zombijs",
+  "item.zombienation.zombie6_spawn_egg":"Zombija Aleksas radīšanas ola",
+  "entity.zombienation.zombie6":"Zombijs",
 
-  "item.zombienation.zombie_7_spawn_egg":"Huska meitenes radīšanas ola",
-  "entity.zombienation.zombie_7":"Zombijs",
+  "item.zombienation.zombie7_spawn_egg":"Huska meitenes radīšanas ola",
+  "entity.zombienation.zombie7":"Zombijs",
 
-  "item.zombienation.zombie_8_spawn_egg":"Zombija meitenes ar ziediem uz galvas radīšanas ola",
-  "entity.zombienation.zombie_8":"Zombijs",
+  "item.zombienation.zombie8_spawn_egg":"Zombija meitenes ar ziediem uz galvas radīšanas ola",
+  "entity.zombienation.zombie8":"Zombijs",
 
-  "item.zombienation.zombie_9_spawn_egg":"Nosaluša mežcirša radīšanas ola",
-  "entity.zombienation.zombie_9":"Zombijs",
+  "item.zombienation.zombie9_spawn_egg":"Nosaluša mežcirša radīšanas ola",
+  "entity.zombienation.zombie9":"Zombijs",
 
   "item.zombienation.zombie_bear_spawn_egg":"Lāča-zombija radīšanas ola",
   "entity.zombienation.zombie_bear":"Lācis-zombijs",

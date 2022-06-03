@@ -3,12 +3,14 @@ package com.madalchemist.zombienation.init;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.madalchemist.zombienation.Zombienation;
+import com.madalchemist.zombienation.client.ModCreativeModeTab;
 import com.madalchemist.zombienation.entity.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -41,13 +43,14 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<Zombie7>> ZOMBIE7 =createEntity("zombie7", Zombie7::new, 0.6f, 1.95f, 0x229922, 0x000000);
     public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createEntity("zombie8", Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
     public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createEntity("zombie9", Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
+    public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createEntity("random_zombie", RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
 
     /* End register entites */
 
     private static <T extends Mob> RegistryObject<EntityType<T>> createEntity(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
         EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC));
+        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
         spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
         SPAWN_EGGS.add(spawnEgg);
         return ENTITY_DEFERRED.register(name, () -> entity);
@@ -55,15 +58,16 @@ public class EntityRegistry {
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        SpawnPlacements.register(ZOMBIE1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE2.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE3.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE4.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE5.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE6.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE7.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE8.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE9.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie1::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE2.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE3.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE4.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE5.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE6.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE7.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE8.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE9.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(RANDOM_ZOMBIE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
     }
 
     @SubscribeEvent
@@ -77,6 +81,7 @@ public class EntityRegistry {
         event.put(ZOMBIE7.get(), Zombie7.createAttributes().build());
         event.put(ZOMBIE8.get(), Zombie8.createAttributes().build());
         event.put(ZOMBIE9.get(), Zombie9.createAttributes().build());
+        event.put(RANDOM_ZOMBIE.get(), RandomZombie.createAttributes().build());
     }
 
     @SubscribeEvent
