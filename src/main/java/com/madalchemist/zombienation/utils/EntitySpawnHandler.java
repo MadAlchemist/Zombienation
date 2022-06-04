@@ -31,17 +31,24 @@ public class EntitySpawnHandler {
                 executor.tell(new TickTask(0, () -> event.getWorld().addFreshEntity(zombie)));
             }
         }
-        if(event.getEntity() instanceof Zombie) {
-            Random random = new Random();
-            double tough = random.nextDouble();
-            double brutal = random.nextDouble();
-            double infernal = random.nextDouble();
 
-            if(infernal < ConfigurationHandler.SPAWN.infernalChance.get()) {
-                ((Mob)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, (int) Integer.MAX_VALUE, 1, (false), (false)));
-            }
-            if(infernal < ConfigurationHandler.SPAWN.infernalChance.get() || brutal < ConfigurationHandler.SPAWN.brutalChance.get()) {
-                ((Mob)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, (int) Integer.MAX_VALUE, 1, (false), (false)));
+        if(event.getEntity() instanceof Zombie) {
+
+            if(((Zombie) event.getEntity()).getActiveEffects().isEmpty()) {
+                Random random = new Random();
+                double tough = random.nextDouble();
+                double brutal = random.nextDouble();
+                double infernal = random.nextDouble();
+
+                if (infernal < ConfigurationHandler.SPAWN.infernalChance.get()) {
+                    ((Mob) event.getEntity()).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, (int) Integer.MAX_VALUE, 1, (false), (false)));
+                }
+                if (infernal < ConfigurationHandler.SPAWN.infernalChance.get() || brutal < ConfigurationHandler.SPAWN.brutalChance.get()) {
+                    ((Mob) event.getEntity()).addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, (int) Integer.MAX_VALUE, 1, (false), (false)));
+                }
+                if (infernal < ConfigurationHandler.SPAWN.infernalChance.get() || brutal < ConfigurationHandler.SPAWN.brutalChance.get() || tough < ConfigurationHandler.SPAWN.brutalChance.get()) {
+                    ((Mob) event.getEntity()).addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) Integer.MAX_VALUE, 1, (false), (false)));
+                }
             }
         }
     }

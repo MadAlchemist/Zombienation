@@ -91,11 +91,9 @@ public class RandomZombie extends Zombie {
                }
                break;
             case 9:
-               if(!ConfigurationHandler.GENERAL.replaceZombiesWithRandomZombies.get()) {
-                  Zombie zombie = new Zombie(EntityType.ZOMBIE, event.getEntity().level);
-                  zombie.setPos(new Vec3(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ()));
-                  event.getEntity().level.addFreshEntity(zombie);
-               }
+               Zombie zombie = new Zombie(EntityType.ZOMBIE, event.getEntity().level);
+               zombie.setPos(new Vec3(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ()));
+               event.getEntity().level.addFreshEntity(zombie);
                break;
             case 10:
                ZombieVillager villager = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, event.getEntity().level);

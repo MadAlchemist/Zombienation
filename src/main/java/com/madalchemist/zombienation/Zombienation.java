@@ -10,10 +10,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(value=Zombienation.MODID)
 public class Zombienation {
     public static final String MODID = "zombienation";
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public Zombienation() {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
