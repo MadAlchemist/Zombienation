@@ -100,7 +100,7 @@ public class ConfigurationHandler {
         public final ForgeConfigSpec.BooleanValue hardcoreInfection;
 
         Infection(ForgeConfigSpec.Builder builder) {
-            builder.push("spawn");
+            builder.push("infection");
                 infectionChance = builder
                         .comment("Chance that you will be infected when hit by zombie")
                         .defineInRange("infectionChance", 0.1, 0.0, 1.0);
