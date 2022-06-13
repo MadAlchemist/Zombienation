@@ -41,10 +41,10 @@ public class ConfigurationHandler {
                     .define("minersHavePickaxes", true);
             warriorsHaveSwords = builder
                     .comment("Should warrior zombies have iron swords? (default: true)")
-                    .define("minersHavePickaxes", true);
+                    .define("warriorsHaveSwords", true);
             warriorsHaveHelmets = builder
                     .comment("Should warrior zombies have iron helmets? (default: true)")
-                    .define("minersHavePickaxes", true);
+                    .define("warriorsHaveHelmets", true);
 
 
             builder.pop();
