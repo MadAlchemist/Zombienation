@@ -1,5 +1,7 @@
 package com.madalchemist.zombienation.entity;
 
+import com.madalchemist.zombienation.init.SoundsRegistry;
+import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,13 +20,12 @@ public class Zombie1 extends Zombie {
 
    @Override
    protected boolean isSunSensitive() {
-      //return ConfigHandler.GENERAL.burnAtDay.get();
-      return false;
+      return ConfigurationHandler.GENERAL.burnAtDay.get();
    }
 
-   //protected SoundEvent getAmbientSound() {
-   //   return SoundsRegistry.ZOMBIE1_AMBIENT;
-   //}
+   protected SoundEvent getAmbientSound() {
+      return SoundsRegistry.ZOMBIE1_AMBIENT;
+   }
    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
       return SoundEvents.ZOMBIE_HURT;
    }

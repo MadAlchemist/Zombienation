@@ -16,7 +16,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '2.0.0.0-1.17.1'
+version = '1.17.1-2.0.1.0'
 group = 'com.madalchemist.zombienation' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'zombienation'
 

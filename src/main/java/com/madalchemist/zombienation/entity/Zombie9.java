@@ -1,5 +1,7 @@
 package com.madalchemist.zombienation.entity;
 
+import com.madalchemist.zombienation.init.SoundsRegistry;
+import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,23 +21,11 @@ public class Zombie9 extends Zombie {
    }
 
    @Override
-   protected boolean isSunSensitive() {
-      //return ConfigHandler.GENERAL.burnAtDay.get();
-      return false;
-   }
-
-   //protected SoundEvent getAmbientSound() {
-   //   return SoundsRegistry.ZOMBIE1_AMBIENT;
-   //}
-   protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-      return SoundEvents.ZOMBIE_HURT;
-   }
-   protected SoundEvent getDeathSound() {
-      return SoundEvents.ZOMBIE_DEATH;
-   }
-   protected SoundEvent getStepSound() {
-      return SoundEvents.ZOMBIE_STEP;
-   }
+   protected boolean isSunSensitive() { return ConfigurationHandler.GENERAL.burnAtDay.get(); }
+   protected SoundEvent getAmbientSound() { return SoundEvents.ZOMBIE_AMBIENT; }
+   protected SoundEvent getHurtSound(DamageSource p_184601_1_) { return SoundEvents.ZOMBIE_HURT; }
+   protected SoundEvent getDeathSound() { return SoundEvents.ZOMBIE_DEATH; }
+   protected SoundEvent getStepSound() { return SoundEvents.ZOMBIE_STEP; }
    protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
       this.playSound(this.getStepSound(), 0.15F, 1.0F);
    }

@@ -1,0 +1,12 @@
+13.06.2022
+* Miners in 1.17.1 now can have helmets and pickaxes;
+* Warriors in 1.17.1 now can have helmets and swords;
+* Hazmat zombies in 1.17.1 now can be immune to potions;
+* Replacing skeletons with zombies now should work;
+* Zombies in 1.17.1 now spread Zombie Virus too;
+* Antizombine is available in 1.17.1 too;
+* Swapped Minecraft and Mod versions in file name to match 1.16.5 version naming;
+
+05.06.2022
+* Added sounds from 1.16.5
+* Fixed "burnAtDay" config option
