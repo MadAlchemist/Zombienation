@@ -1,6 +1,7 @@
 package com.madalchemist.zombienation.utils;
 
 import com.madalchemist.zombienation.Zombienation;
+import com.madalchemist.zombienation.entity.Zombie5;
 import com.madalchemist.zombienation.init.EntityRegistry;
 import com.madalchemist.zombienation.init.PotionsRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,8 +28,9 @@ public class InfectionHandler {
                 }
             }
         }
-        if(event.getEntityLiving().getType().equals(EntityRegistry.ZOMBIE5.get())) {
-            if(ConfigurationHandler.GENERAL.hazmatZombiesImmuneToPotions.get()) {
+        if(event.getEntityLiving() instanceof Zombie5) {
+            if(ConfigurationHandler.GENERAL.hazmatZombiesImmuneToPotions.get() && event.getSource().isMagic()) {
+                event.setAmount(0.0f);
                 event.setCanceled(true);
             }
         }
