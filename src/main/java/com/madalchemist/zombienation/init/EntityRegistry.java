@@ -44,6 +44,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createEntity("zombie8", Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
     public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createEntity("zombie9", Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
     public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createEntity("random_zombie", RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
+    public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createEntity("chesthead", Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
 
     /* End register entites */
 
@@ -68,6 +69,7 @@ public class EntityRegistry {
         SpawnPlacements.register(ZOMBIE8.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(ZOMBIE9.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(RANDOM_ZOMBIE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(CHESTHEAD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
     }
 
     @SubscribeEvent
@@ -82,6 +84,7 @@ public class EntityRegistry {
         event.put(ZOMBIE8.get(), Zombie8.createAttributes().build());
         event.put(ZOMBIE9.get(), Zombie9.createAttributes().build());
         event.put(RANDOM_ZOMBIE.get(), RandomZombie.createAttributes().build());
+        event.put(CHESTHEAD.get(), RandomZombie.createAttributes().build());
     }
 
     @SubscribeEvent

@@ -1,3 +1,8 @@
+14.06.2022
+* Fixed another bug in config
+* Ported chesthead
+* Ported loot mechanics and config section
+
 13.06.2022
 * Miners in 1.17.1 now can have helmets and pickaxes;
 * Warriors in 1.17.1 now can have helmets and swords;

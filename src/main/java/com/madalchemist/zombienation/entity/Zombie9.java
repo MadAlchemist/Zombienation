@@ -2,6 +2,7 @@ package com.madalchemist.zombienation.entity;
 
 import com.madalchemist.zombienation.init.SoundsRegistry;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
+import com.madalchemist.zombienation.utils.LootHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -14,7 +15,11 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = "zombienation")
 public class Zombie9 extends Zombie {
    public Zombie9(EntityType<? extends Zombie> zombie, Level level) {
       super(zombie, level);
@@ -43,14 +48,14 @@ public class Zombie9 extends Zombie {
       return super.checkSpawnRules(world, reason);
    }
 
-   /*
+
    @SubscribeEvent
    public static void onDeath(LivingDeathEvent death) {
-      if(death.getEntityLiving() instanceof Zombie1) {
-         LootHelper.dropLoot(ConfigHandler.LOOT.zombie1_loot.get(),
-                 ConfigHandler.LOOT.zombie1_drop_chance.get(),
+      if(death.getEntityLiving() instanceof Zombie9) {
+         LootHelper.dropLoot(ConfigurationHandler.LOOT.zombie9_loot.get(),
+                 ConfigurationHandler.LOOT.zombie9_drop_chance.get(),
                  death.getEntityLiving());
       }
    }
-   */
+
 }

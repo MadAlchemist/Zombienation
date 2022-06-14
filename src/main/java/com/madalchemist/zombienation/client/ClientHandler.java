@@ -29,5 +29,6 @@ public class ClientHandler {
         event.registerEntityRenderer(EntityRegistry.ZOMBIE8.get(), ZombieRenderer8::new);
         event.registerEntityRenderer(EntityRegistry.ZOMBIE9.get(), ZombieRenderer9::new);
         event.registerEntityRenderer(EntityRegistry.RANDOM_ZOMBIE.get(), ZombieRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CHESTHEAD.get(), ChestheadRenderer::new);
     }
 }

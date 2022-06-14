@@ -2,6 +2,7 @@ package com.madalchemist.zombienation.entity;
 
 import com.madalchemist.zombienation.init.SoundsRegistry;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
+import com.madalchemist.zombienation.utils.LootHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -12,7 +13,11 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = "zombienation")
 public class Zombie1 extends Zombie {
    public Zombie1(EntityType<? extends Zombie> zombie, Level level) {
       super(zombie, level);
@@ -52,14 +57,12 @@ public class Zombie1 extends Zombie {
       return super.checkSpawnRules(world, reason);
    }
 
-   /*
    @SubscribeEvent
    public static void onDeath(LivingDeathEvent death) {
       if(death.getEntityLiving() instanceof Zombie1) {
-         LootHelper.dropLoot(ConfigHandler.LOOT.zombie1_loot.get(),
-                 ConfigHandler.LOOT.zombie1_drop_chance.get(),
+         LootHelper.dropLoot(ConfigurationHandler.LOOT.zombie1_loot.get(),
+                 ConfigurationHandler.LOOT.zombie1_drop_chance.get(),
                  death.getEntityLiving());
       }
    }
-   */
 }

@@ -1,6 +1,7 @@
 package com.madalchemist.zombienation.utils;
 
 import com.madalchemist.zombienation.Zombienation;
+import com.madalchemist.zombienation.entity.Chesthead;
 import com.madalchemist.zombienation.entity.RandomZombie;
 import com.madalchemist.zombienation.entity.Zombie3;
 import com.madalchemist.zombienation.entity.Zombie4;
@@ -80,6 +81,16 @@ public class EntitySpawnHandler {
                 ItemStack helmet = new ItemStack(Items.IRON_HELMET, 1);
                 ((Zombie4) event.getEntity()).setItemSlot(EquipmentSlot.HEAD, helmet);
             }
+        }
+
+        if(event.getEntity() instanceof Chesthead) {
+                ItemStack chest = new ItemStack(Items.CHEST, 1);
+                ((Chesthead) event.getEntity()).setItemSlot(EquipmentSlot.HEAD, chest);
+                if(!((Chesthead) event.getEntity()).getActiveEffects().isEmpty()) {
+                    ((Chesthead) event.getEntity()).removeAllEffects();
+                }
+                ((Chesthead)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, Integer.MAX_VALUE, 1, false, false));
+                ((Chesthead)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.ABSORPTION, Integer.MAX_VALUE, 2, false, false));
         }
     }
 }

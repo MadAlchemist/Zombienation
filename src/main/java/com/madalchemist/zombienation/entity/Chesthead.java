@@ -4,24 +4,31 @@ import com.madalchemist.zombienation.init.SoundsRegistry;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import com.madalchemist.zombienation.utils.LootHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = "zombienation")
-public class Zombie5 extends Zombie {
-   public Zombie5(EntityType<? extends Zombie> zombie, Level level) {
+public class Chesthead extends Zombie {
+   public Chesthead(EntityType<? extends Zombie> zombie, Level level) {
       super(zombie, level);
    }
 
@@ -31,13 +38,13 @@ public class Zombie5 extends Zombie {
    }
 
    protected SoundEvent getAmbientSound() {
-      return SoundsRegistry.ZOMBIE5_AMBIENT;
+      return SoundsRegistry.ZOMBIE1_AMBIENT;
    }
    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-      return SoundEvents.ZOMBIE_HURT;
+      return SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR;
    }
    protected SoundEvent getDeathSound() {
-      return SoundEvents.ZOMBIE_DEATH;
+      return SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR;
    }
    protected SoundEvent getStepSound() {
       return SoundEvents.ZOMBIE_STEP;
@@ -59,12 +66,31 @@ public class Zombie5 extends Zombie {
       return super.checkSpawnRules(world, reason);
    }
 
+
    @SubscribeEvent
    public static void onDeath(LivingDeathEvent death) {
-      if(death.getEntityLiving() instanceof Zombie5) {
-         LootHelper.dropLoot(ConfigurationHandler.LOOT.zombie5_loot.get(),
-                 ConfigurationHandler.LOOT.zombie5_drop_chance.get(),
-                 death.getEntityLiving());
+      if(death.getEntity() instanceof Chesthead) {
+         death.getEntityLiving().setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+         ItemEntity itementity = new ItemEntity(death.getEntityLiving().level,
+                 death.getEntityLiving().getX(),
+                 death.getEntityLiving().getY(),
+                 death.getEntityLiving().getZ(),
+                 getRandomLoot());
+         death.getEntityLiving().level.addFreshEntity(itementity);
       }
    }
+
+   private static ItemStack getRandomLoot() {
+      int max_index =  ConfigurationHandler.LOOT.chestheadLoot.get().size()-1;
+      int index = (int)Math.round(Math.random()*max_index);
+      String id = ConfigurationHandler.LOOT.chestheadLoot.get().get(index);
+      String id_parts[] = id.split(":");
+      if(id_parts.length <= 1 || id_parts.length > 3) { return ItemStack.EMPTY; }
+      return(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(id_parts[0], id_parts[1])),1));
+   }
+
+   public boolean checkSpawnRules(ServerLevelAccessor world, MobSpawnType reason) {
+      return super.checkSpawnRules(world, reason);
+   }
+
 }
