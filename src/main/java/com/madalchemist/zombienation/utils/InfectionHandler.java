@@ -63,6 +63,7 @@ public class InfectionHandler {
             Creeper creeper = (Creeper) event.getEntity();
             creeper.addEffect(new MobEffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigurationHandler.INFECTION.infectionDuration.get(), (int) 0, true, (false)));
             creeper.hurt(DamageSource.CACTUS, 1.0f);
+            creeper.setTarget(null);
             event.setCanceled(true);
             }
     }

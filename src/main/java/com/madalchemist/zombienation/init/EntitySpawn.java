@@ -35,6 +35,7 @@ public class EntitySpawn {
                         ConfigurationHandler.SPAWN.chestheadGroupMin.get(),
                         ConfigurationHandler.SPAWN.chestheadGroupMax.get()));
             }
+
             if (BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).contains(resourceKey)) {
                 event.getSpawns().getSpawner(MobCategory.CREATURE)
                         .add(new MobSpawnSettings.SpawnerData(EntityRegistry.BROWN_BEAR.get(),

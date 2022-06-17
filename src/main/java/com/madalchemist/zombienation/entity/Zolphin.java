@@ -4,6 +4,7 @@ import com.madalchemist.zombienation.entity.ai.FeralNearestAttackableTargetGoal;
 import com.madalchemist.zombienation.entity.ai.ModdedNearestAttackableTargetGoal;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.goal.FollowBoatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -33,5 +34,10 @@ public class Zolphin extends Dolphin {
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, (double)1.2F, true));
         this.goalSelector.addGoal(8, new FollowBoatGoal(this));
         //this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, LivingEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 }

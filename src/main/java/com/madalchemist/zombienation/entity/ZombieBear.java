@@ -36,7 +36,7 @@ import java.util.function.Predicate;
 
 @Mod.EventBusSubscriber(modid = "zombienation")
 public class ZombieBear extends Monster {
-    private static final EntityDataAccessor<Boolean> DATA_STANDING_ID = SynchedEntityData.defineId(PolarBear.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_STANDING_ID = SynchedEntityData.defineId(ZombieBear.class, EntityDataSerializers.BOOLEAN);
     private float clientSideStandAnimationO;
     private float clientSideStandAnimation;
     private int warningSoundTicks;
@@ -199,5 +199,10 @@ public class ZombieBear extends Monster {
             this.playSound(SoundEvents.POLAR_BEAR_WARNING, 1.0F, this.getVoicePitch());
             this.warningSoundTicks = 40;
         }
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 }

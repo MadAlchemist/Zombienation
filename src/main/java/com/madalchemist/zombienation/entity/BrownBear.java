@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 
 public class BrownBear extends PolarBear {
 
-    public BrownBear(EntityType<? extends PolarBear> p_29519_, Level p_29520_) {
+    public BrownBear(EntityType<? extends BrownBear> p_29519_, Level p_29520_) {
         super(p_29519_, p_29520_);
     }
 

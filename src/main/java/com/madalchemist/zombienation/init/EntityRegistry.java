@@ -95,7 +95,7 @@ public class EntityRegistry {
         SpawnPlacements.register(ZOMBIE9.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(RANDOM_ZOMBIE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(CHESTHEAD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
-        SpawnPlacements.register(ZOMBIE_BEAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE_BEAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombieBear::checkMonsterSpawnRules);
         SpawnPlacements.register(BROWN_BEAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BrownBear::checkAnimalSpawnRules);
     }
 
