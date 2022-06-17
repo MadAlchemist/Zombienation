@@ -53,5 +53,7 @@
   "item.zombienation.composite_bricks": "Composite bricks",
   "block.zombienation.composite_bricks": "Composite bricks",
   "item.zombienation.netherite_door": "Netherite door",
-  "block.zombienation.netherite_door": "Netherite door"
+  "block.zombienation.netherite_door": "Netherite door",
+
+  "death.attack.zombification": "%1$s turned into zombie!"
 }

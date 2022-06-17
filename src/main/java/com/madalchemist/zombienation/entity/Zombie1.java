@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation.entity;
 
+import com.madalchemist.zombienation.entity.ai.FeralNearestAttackableTargetGoal;
 import com.madalchemist.zombienation.init.SoundsRegistry;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import com.madalchemist.zombienation.utils.LootHelper;
@@ -9,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.PolarBear;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.level.*;
@@ -47,10 +49,10 @@ public class Zombie1 extends Zombie {
    @Override
    public void registerGoals() {
       super.registerGoals();
-      //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBearEntity.class, true));
-      //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
+      this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBear.class, true));
+      this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBear.class, true));
       this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Horse.class, true));
-      //this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
+      this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, Mob.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
    }
 
    public boolean checkSpawnRules(LevelAccessor world, MobSpawnType reason) {

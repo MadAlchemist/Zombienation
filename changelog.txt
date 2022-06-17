@@ -1,3 +1,7 @@
+17.06.2022
+* Implemented everything from 1.16.5, except structures, they are totally broken in 1.17.1
+Don't expect them too soon. Otherwise, everything must be as playable as in 1.16.5.
+
 14.06.2022
 * Fixed another bug in config
 * Ported chesthead

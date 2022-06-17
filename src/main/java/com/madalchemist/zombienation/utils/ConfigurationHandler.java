@@ -13,10 +13,12 @@ public class ConfigurationHandler {
     public static final Spawn SPAWN = new Spawn(BUILDER);
     public static final Infection INFECTION = new Infection(BUILDER);
     public static final Loot LOOT = new Loot(BUILDER);
-
+    public static final Senses SENSES = new Senses(BUILDER);
     public static class General {
         public final ForgeConfigSpec.BooleanValue burnAtDay;
         public final ForgeConfigSpec.BooleanValue replaceSkeletonsWithRandomZombies;
+
+        public final ForgeConfigSpec.BooleanValue feralMode;
         public final ForgeConfigSpec.BooleanValue hazmatZombiesImmuneToPotions;
         public final ForgeConfigSpec.BooleanValue minersHavePickaxes;
         public final ForgeConfigSpec.BooleanValue minersHaveHelmets;
@@ -34,6 +36,10 @@ public class ConfigurationHandler {
             replaceSkeletonsWithRandomZombies = builder
                     .comment("Should skeletons be replaced with random zombies in overworld? (default: false)")
                     .define("replaceSkeletons", false);
+
+            feralMode = builder
+                    .comment("Should zombies attack everything that isn't undead (like withers do)?")
+                    .define("feralMode", false);
 
             hazmatZombiesImmuneToPotions = builder
                     .comment("Should hazmat suit protect zombies from splash potions? (default: true)")
@@ -65,6 +71,10 @@ public class ConfigurationHandler {
         public final ForgeConfigSpec.IntValue chestheadGroupMin;
         public final ForgeConfigSpec.IntValue chestheadGroupMax;
 
+        public final ForgeConfigSpec.IntValue brownBearSpawnWeight;
+        public final ForgeConfigSpec.IntValue brownBearGroupMin;
+        public final ForgeConfigSpec.IntValue brownBearGroupMax;
+
         public final ForgeConfigSpec.DoubleValue toughChance;
         public final ForgeConfigSpec.DoubleValue brutalChance;
         public final ForgeConfigSpec.DoubleValue infernalChance;
@@ -92,6 +102,16 @@ public class ConfigurationHandler {
             chestheadGroupMax = builder
                     .comment("Maximum count in spawn group of chestheads (Vanilla endermen = 4)")
                     .defineInRange("chestheadSpawnGroupMax", 4, 0, 16);
+
+            brownBearSpawnWeight = builder
+                    .comment("Spawn weight of brown bears (Vanilla endermen = 100")
+                    .defineInRange("brownBearSpawnWeight", 10, 0, 1000);
+            brownBearGroupMax = builder
+                    .comment("Minimum count in spawn group of brown bears (Vanilla endermen = 1)")
+                    .defineInRange("brownBearSpawnGroupMin", 1, 0, 16);
+            brownBearGroupMin = builder
+                    .comment("Maximum count in spawn group of brown bears (Vanilla endermen = 4)")
+                    .defineInRange("brownBearSpawnGroupMax", 4, 0, 16);
 
             toughChance = builder
                     .comment("Chance that new humanoid zombie will receive Regeneration II buff on spawn")
@@ -148,6 +168,74 @@ public class ConfigurationHandler {
         }
     }
 
+    public static class Senses {
+        public ForgeConfigSpec.ConfigValue<List<String>> blockPlace;
+        public ForgeConfigSpec.ConfigValue<List<String>> blockBreak;
+        public ForgeConfigSpec.IntValue blockPlaceNotifyRadius;
+        public ForgeConfigSpec.IntValue blockBreakNotifyRadius;
+        public ForgeConfigSpec.IntValue explosionNotifyRadius;
+        public ForgeConfigSpec.IntValue anvilNotifyRadius;
+        public ForgeConfigSpec.IntValue noteblockNotifyRadius;
+
+        Senses(ForgeConfigSpec.Builder builder) {
+            builder.push("Senses");
+
+            List<String> blockbreak = new ArrayList<String>();
+            blockbreak.add("minecraft:glass");
+            blockbreak.add("minecraft:torch");
+            blockbreak.add("minecraft:coal_ore");
+            blockbreak.add("minecraft:iron_ore");
+            blockbreak.add("minecraft:gold_ore");
+            blockbreak.add("minecraft:diamond_ore");
+            blockbreak.add("minecraft:emerald_ore");
+            blockbreak.add("minecraft:redstone_ore");
+            blockbreak.add("minecraft:lapis_ore");
+            blockbreak.add("minecraft:anvil");
+            blockbreak.add("minecraft:lantern");
+            blockbreak.add("minecraft:soul_lantern");
+            blockbreak.add("minecraft:redstone_lamp");
+            blockbreak.add("minecraft:sea_lantern");
+
+            List<String> blockplace = new ArrayList<String>();
+
+            blockplace.add("minecraft:torch");
+            blockplace.add("minecraft:anvil");
+            blockplace.add("minecraft:lantern");
+            blockplace.add("minecraft:soul_lantern");
+            blockplace.add("minecraft:redstone_lamp");
+            blockplace.add("minecraft:sea_lantern");
+
+            blockPlace = builder
+                    .comment("List of blocks that attract zombies when placed")
+                    .define("blockPlace", blockplace);
+            blockBreak = builder
+                    .comment("List of blocks that attract zombies when broken")
+                    .define("blockPlace", blockbreak);
+
+            blockPlaceNotifyRadius = builder
+                    .comment("How far zombies can hear blocks placed?")
+                    .defineInRange("blockPlaceNotifyRadius", 32, 0, 512);
+
+            blockBreakNotifyRadius = builder
+                    .comment("How far zombies can hear blocks broken?")
+                    .defineInRange("blockBreakNotifyRadius", 64, 0, 512);
+
+            explosionNotifyRadius = builder
+                    .comment("How far zombies can hear explosions?")
+                    .defineInRange("explosionNotifyRadius", 128, 0, 512);
+
+            anvilNotifyRadius = builder
+                    .comment("How far zombies can hear someone using anvil?")
+                    .defineInRange("anvilNotifyRadius", 32, 0, 512);
+
+            noteblockNotifyRadius = builder
+                    .comment("How far zombies can hear noteblocks?")
+                    .defineInRange("noteblockNotifyRadius", 48, 0, 512);
+
+            builder.pop();
+        }
+    }
+
     public static class Loot {
         public ForgeConfigSpec.ConfigValue<String> zombie1_loot;
         public ForgeConfigSpec.DoubleValue zombie1_drop_chance;
@@ -167,10 +255,10 @@ public class ConfigurationHandler {
         public ForgeConfigSpec.DoubleValue zombie8_drop_chance;
         public ForgeConfigSpec.ConfigValue<String> zombie9_loot;
         public ForgeConfigSpec.DoubleValue zombie9_drop_chance;
-        //public ForgeConfigSpec.ConfigValue<String> zombie_bear_loot;
-        //public ForgeConfigSpec.DoubleValue zombie_bear_drop_chance;
-        //public ForgeConfigSpec.ConfigValue<String> brown_bear_loot;
-        //public ForgeConfigSpec.DoubleValue brown_bear_drop_chance;
+        public ForgeConfigSpec.ConfigValue<String> zombie_bear_loot;
+        public ForgeConfigSpec.DoubleValue zombie_bear_drop_chance;
+        public ForgeConfigSpec.ConfigValue<String> brown_bear_loot;
+        public ForgeConfigSpec.DoubleValue brown_bear_drop_chance;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> chestheadLoot;
 
         Loot(ForgeConfigSpec.Builder builder) {
@@ -237,7 +325,7 @@ public class ConfigurationHandler {
             zombie9_drop_chance = builder
                     .comment("Frozen lumberjack loot drop chance:")
                     .defineInRange("zombie9_drop_chance", 0.5d, 0.0d, 1.0d);
-            /*
+
             zombie_bear_loot = builder
                     .comment("Zombie bear loot:")
                     .define("zombie_bear_loot", "minecraft:bone_block");
@@ -251,7 +339,7 @@ public class ConfigurationHandler {
             brown_bear_drop_chance = builder
                     .comment("Brown bear loot drop chance:")
                     .defineInRange("brown_bear_drop_chance", 0.5d, 0.0d, 1.0d);
-            */
+
             ArrayList<String> loots = new ArrayList<String>(128);
             loots.add("minecraft:rotten_flesh");
             loots.add("minecraft:oak_planks");
@@ -261,7 +349,6 @@ public class ConfigurationHandler {
 
             builder.pop();
         }
-
         public static boolean itemExists(String ID) {
             String id_parts[] = ID.split(":");
             if (id_parts.length <= 1 || id_parts.length > 3) {

@@ -1,6 +1,8 @@
 package com.madalchemist.zombienation.utils;
 
+import com.madalchemist.zombienation.entity.BrownBear;
 import com.madalchemist.zombienation.init.ItemsRegistry;
+import com.madalchemist.zombienation.init.PotionsRegistry;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -40,8 +42,8 @@ public class PotionZombieVirus extends MobEffect {
             if (!entity.hasEffect(MobEffects.WEAKNESS) && Math.random() <= 0.333 && ConfigurationHandler.INFECTION.infectionWeakness.get())
                 entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 0, false, false));
         }
-        // Animals don't die from virus itself, but are very vulnerable due to poisoning.
-        if(entity instanceof PolarBear /*|| entity instanceof BrownBearEntity */|| entity instanceof Horse || entity instanceof Wolf || entity instanceof Dolphin) {
+        // Most animals don't die from virus itself, but are very vulnerable due to poisoning.
+        if(entity instanceof PolarBear || entity instanceof BrownBear || entity instanceof Horse || entity instanceof Wolf) {
             if (!entity.hasEffect(MobEffects.POISON) && Math.random() <= 0.000167819)
                 entity.addEffect(new MobEffectInstance(MobEffects.POISON, 40, 0, false, false));
         }
@@ -51,7 +53,7 @@ public class PotionZombieVirus extends MobEffect {
         if(!(entity instanceof Player)) {
             if(entity.hasEffect(MobEffects.WEAKNESS) && entity.hasEffect(MobEffects.DAMAGE_BOOST)) {
                 if(!entity.level.isClientSide()) {
-                    //entity.removeEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS);
+                    entity.removeEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS);
                     entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0, false, false));
                     entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1200, 0, false, false));
                 }

@@ -1,10 +1,8 @@
 package com.madalchemist.zombienation.utils;
 
 import com.madalchemist.zombienation.Zombienation;
-import com.madalchemist.zombienation.entity.Chesthead;
-import com.madalchemist.zombienation.entity.RandomZombie;
-import com.madalchemist.zombienation.entity.Zombie3;
-import com.madalchemist.zombienation.entity.Zombie4;
+import com.madalchemist.zombienation.entity.*;
+import com.madalchemist.zombienation.entity.ai.FeralNearestAttackableTargetGoal;
 import com.madalchemist.zombienation.init.EntityRegistry;
 import net.minecraft.server.TickTask;
 import net.minecraft.util.thread.BlockableEventLoop;
@@ -13,7 +11,15 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Dolphin;
+import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fmllegacy.LogicalSidedProvider;
 
 import java.util.Random;
+import java.util.function.Predicate;
 
 @Mod.EventBusSubscriber(modid = Zombienation.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntitySpawnHandler {
@@ -41,7 +48,18 @@ public class EntitySpawnHandler {
             }
         }
 
+        if(event.getEntity() instanceof Creeper) {
+            Creeper creeper = (Creeper) event.getEntity();
+            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, Zombie.class, 6.0F, 1.0D, 1.2D));
+        }
+
         if(event.getEntity() instanceof Zombie) {
+
+            ((Zombie)event.getEntity()).targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), BrownBear.class, true));
+            ((Zombie)event.getEntity()).targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), PolarBear.class, true));
+            ((Zombie)event.getEntity()).targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), Horse.class, true));
+            ((Zombie)event.getEntity()).targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(((Zombie)event.getEntity()), Mob.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
+
 
             if(((Zombie) event.getEntity()).getActiveEffects().isEmpty()) {
                 Random random = new Random();
@@ -91,6 +109,10 @@ public class EntitySpawnHandler {
                 }
                 ((Chesthead)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, Integer.MAX_VALUE, 1, false, false));
                 ((Chesthead)event.getEntity()).addEffect(new MobEffectInstance(MobEffects.ABSORPTION, Integer.MAX_VALUE, 2, false, false));
+        }
+
+        if(event.getEntity() instanceof Dolphin) {
+            ((Dolphin)event.getEntity()).targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(((Dolphin)event.getEntity()), Drowned.class, 10, true, true, (Predicate<LivingEntity>)null));
         }
     }
 }

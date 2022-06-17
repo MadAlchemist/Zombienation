@@ -53,5 +53,7 @@
   "item.zombienation.composite_bricks": "Kompozīta ķieģeļi",
   "block.zombienation.composite_bricks": "Kompozīta ķieģeļi",
   "item.zombienation.netherite_door": "Nezerīta durvis",
-  "block.zombienation.netherite_door": "Nezerīta durvis"
+  "block.zombienation.netherite_door": "Nezerīta durvis",
+
+  "death.attack.zombification": "%1$s pārvertas par zombiju!"
 }

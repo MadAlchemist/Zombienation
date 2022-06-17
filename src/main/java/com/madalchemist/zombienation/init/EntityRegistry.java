@@ -10,6 +10,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -34,21 +37,23 @@ public class EntityRegistry {
 
     /* Register entities here */
 
-    public static final RegistryObject<EntityType<Zombie1>> ZOMBIE1 =createEntity("zombie1", Zombie1::new, 0.6f, 1.95f, 0x229922, 0xaaaaaa);
-    public static final RegistryObject<EntityType<Zombie2>> ZOMBIE2 =createEntity("zombie2", Zombie2::new, 0.6f, 1.95f, 0x229922, 0x226611);
-    public static final RegistryObject<EntityType<Zombie3>> ZOMBIE3 =createEntity("zombie3", Zombie3::new, 0.6f, 1.95f, 0x229922, 0x334455);
-    public static final RegistryObject<EntityType<Zombie4>> ZOMBIE4 =createEntity("zombie4", Zombie4::new, 0.6f, 1.95f, 0x229922, 0x785209);
-    public static final RegistryObject<EntityType<Zombie5>> ZOMBIE5 =createEntity("zombie5", Zombie5::new, 0.6f, 1.95f, 0x229922, 0xbaba40);
-    public static final RegistryObject<EntityType<Zombie6>> ZOMBIE6 =createEntity("zombie6", Zombie6::new, 0.6f, 1.95f, 0x229922, 0xdead00);
-    public static final RegistryObject<EntityType<Zombie7>> ZOMBIE7 =createEntity("zombie7", Zombie7::new, 0.6f, 1.95f, 0x229922, 0x000000);
-    public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createEntity("zombie8", Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
-    public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createEntity("zombie9", Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
-    public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createEntity("random_zombie", RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
-    public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createEntity("chesthead", Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
-
+    public static final RegistryObject<EntityType<Zombie1>> ZOMBIE1 =createMonster("zombie1", Zombie1::new, 0.6f, 1.95f, 0x229922, 0xaaaaaa);
+    public static final RegistryObject<EntityType<Zombie2>> ZOMBIE2 =createMonster("zombie2", Zombie2::new, 0.6f, 1.95f, 0x229922, 0x226611);
+    public static final RegistryObject<EntityType<Zombie3>> ZOMBIE3 =createMonster("zombie3", Zombie3::new, 0.6f, 1.95f, 0x229922, 0x334455);
+    public static final RegistryObject<EntityType<Zombie4>> ZOMBIE4 =createMonster("zombie4", Zombie4::new, 0.6f, 1.95f, 0x229922, 0x785209);
+    public static final RegistryObject<EntityType<Zombie5>> ZOMBIE5 =createMonster("zombie5", Zombie5::new, 0.6f, 1.95f, 0x229922, 0xbaba40);
+    public static final RegistryObject<EntityType<Zombie6>> ZOMBIE6 =createMonster("zombie6", Zombie6::new, 0.6f, 1.95f, 0x229922, 0xdead00);
+    public static final RegistryObject<EntityType<Zombie7>> ZOMBIE7 =createMonster("zombie7", Zombie7::new, 0.6f, 1.95f, 0x229922, 0x000000);
+    public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createMonster("zombie8", Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
+    public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createMonster("zombie9", Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
+    public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createMonster("random_zombie", RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
+    public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createMonster("chesthead", Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
+    public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR =createMonster("zombie_bear", ZombieBear::new, 1.4f, 1.4f, 0x888888, 0x008800);
+    public static final RegistryObject<EntityType<BrownBear>> BROWN_BEAR =createAnimal("brown_bear", BrownBear::new, 1.4f, 1.4f, 0x4a2206, 0x999999);
+    public static final RegistryObject<EntityType<Zolphin>> ZOLPHIN =createWaterMob("zolphin", Zolphin::new, true, 1.4f, 1.4f, 0x99bb99, 0x99ff99);
     /* End register entites */
 
-    private static <T extends Mob> RegistryObject<EntityType<T>> createEntity(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+    private static <T extends Mob> RegistryObject<EntityType<T>> createMonster(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
         EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
         Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
@@ -56,6 +61,26 @@ public class EntityRegistry {
         SPAWN_EGGS.add(spawnEgg);
         return ENTITY_DEFERRED.register(name, () -> entity);
     }
+
+    private static <T extends Animal> RegistryObject<EntityType<T>> createAnimal(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+        ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
+        EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
+        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
+        spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
+        SPAWN_EGGS.add(spawnEgg);
+        return ENTITY_DEFERRED.register(name, () -> entity);
+    }
+
+    private static <T extends WaterAnimal> RegistryObject<EntityType<T>> createWaterMob(String name, EntityType.EntityFactory<T> factory, boolean isHostile, float width, float height, int eggPrimary, int eggSecondary) {
+        ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
+        EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.WATER_CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
+        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
+        spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
+        SPAWN_EGGS.add(spawnEgg);
+        return ENTITY_DEFERRED.register(name, () -> entity);
+    }
+
+
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
@@ -70,6 +95,8 @@ public class EntityRegistry {
         SpawnPlacements.register(ZOMBIE9.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(RANDOM_ZOMBIE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
         SpawnPlacements.register(CHESTHEAD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(ZOMBIE_BEAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zombie::checkMonsterSpawnRules);
+        SpawnPlacements.register(BROWN_BEAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BrownBear::checkAnimalSpawnRules);
     }
 
     @SubscribeEvent
@@ -84,7 +111,10 @@ public class EntityRegistry {
         event.put(ZOMBIE8.get(), Zombie8.createAttributes().build());
         event.put(ZOMBIE9.get(), Zombie9.createAttributes().build());
         event.put(RANDOM_ZOMBIE.get(), RandomZombie.createAttributes().build());
-        event.put(CHESTHEAD.get(), RandomZombie.createAttributes().build());
+        event.put(CHESTHEAD.get(), Chesthead.createAttributes().build());
+        event.put(ZOMBIE_BEAR.get(), ZombieBear.createAttributes().build());
+        event.put(BROWN_BEAR.get(), BrownBear.createAttributes().build());
+        event.put(ZOLPHIN.get(), Zolphin.createAttributes().build());
     }
 
     @SubscribeEvent

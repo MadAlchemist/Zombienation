@@ -53,5 +53,7 @@
   "item.zombienation.composite_bricks": "Композитные кирпичи",
   "block.zombienation.composite_bricks": "Композитные кирпичи",
   "item.zombienation.netherite_door": "Незеритовая дверь",
-  "block.zombienation.netherite_door": "Незеритовая дверь"
+  "block.zombienation.netherite_door": "Незеритовая дверь",
+
+  "death.attack.zombification": "%1$s превратился в зомби!"
 }

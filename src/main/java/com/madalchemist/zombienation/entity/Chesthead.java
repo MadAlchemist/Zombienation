@@ -1,5 +1,6 @@
 package com.madalchemist.zombienation.entity;
 
+import com.madalchemist.zombienation.entity.ai.FeralNearestAttackableTargetGoal;
 import com.madalchemist.zombienation.init.SoundsRegistry;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import com.madalchemist.zombienation.utils.LootHelper;
@@ -10,8 +11,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.PolarBear;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Zombie;
@@ -25,6 +28,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Predicate;
 
 @Mod.EventBusSubscriber(modid = "zombienation")
 public class Chesthead extends Zombie {
@@ -56,10 +61,10 @@ public class Chesthead extends Zombie {
    @Override
    public void registerGoals() {
       super.registerGoals();
-      //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBearEntity.class, true));
-      //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
+      this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BrownBear.class, true));
+      this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PolarBear.class, true));
       this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Horse.class, true));
-      //this.targetSelector.addGoal(2, new FeralNearestAttackableTargetGoal<>(this, MobEntity.class, 0, false, false, FeralNearestAttackableTargetGoal.LIVING_ENTITY_SELECTOR));
+      this.targetSelector.addGoal(1, new FeralNearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, true, (Predicate<LivingEntity>)null));
    }
 
    public boolean checkSpawnRules(LevelAccessor world, MobSpawnType reason) {
