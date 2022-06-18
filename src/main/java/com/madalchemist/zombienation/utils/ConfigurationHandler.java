@@ -106,10 +106,10 @@ public class ConfigurationHandler {
             brownBearSpawnWeight = builder
                     .comment("Spawn weight of brown bears (Vanilla endermen = 100")
                     .defineInRange("brownBearSpawnWeight", 10, 0, 1000);
-            brownBearGroupMax = builder
+            brownBearGroupMin = builder
                     .comment("Minimum count in spawn group of brown bears (Vanilla endermen = 1)")
                     .defineInRange("brownBearSpawnGroupMin", 1, 0, 16);
-            brownBearGroupMin = builder
+            brownBearGroupMax = builder
                     .comment("Maximum count in spawn group of brown bears (Vanilla endermen = 4)")
                     .defineInRange("brownBearSpawnGroupMax", 4, 0, 16);
 
