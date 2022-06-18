@@ -37,11 +37,12 @@ public class Zombienation {
 
     public Zombienation() {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        registerDeferredRegistries(eventBus);
         eventBus.addListener(this::setupCommon);
         eventBus.addListener(this::setupClient);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigurationHandler.spec);
         eventBus.addGenericListener(MobEffect.class, getRegistrator(this::onRegisterEffects));
-        registerDeferredRegistries(eventBus);
+
     }
 
     public void setupCommon(final FMLCommonSetupEvent event) {
@@ -53,7 +54,6 @@ public class Zombienation {
     }
 
     public static void registerDeferredRegistries(IEventBus modBus) {
-
         EntityRegistry.ENTITY_DEFERRED.register(modBus);
         ItemsRegistry.ITEMS.register(modBus);
     }

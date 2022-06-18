@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.Level;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -54,11 +55,21 @@ public class EntityRegistry {
     /* End register entites */
 
     private static <T extends Mob> RegistryObject<EntityType<T>> createMonster(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+        Zombienation.LOGGER.printf(Level.INFO, "Creating monster:\n");
+        Zombienation.LOGGER.printf(Level.INFO, "Getting resource location:...");
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
+        Zombienation.LOGGER.printf(Level.INFO, "OK\n");
+        Zombienation.LOGGER.printf(Level.INFO, "Creating EntityType:...");
         EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
+        Zombienation.LOGGER.printf(Level.INFO, "OK\n");
+        Zombienation.LOGGER.printf(Level.INFO, "Creating Spawn egg:...");
         Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
+        Zombienation.LOGGER.printf(Level.INFO, "Ok\n");
+        Zombienation.LOGGER.printf(Level.INFO, "Registering spawn egg...");
         spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
         SPAWN_EGGS.add(spawnEgg);
+        Zombienation.LOGGER.printf(Level.INFO, "Ok\n");
+        Zombienation.LOGGER.printf(Level.INFO, "Done, registering monster!\n");
         return ENTITY_DEFERRED.register(name, () -> entity);
     }
 
