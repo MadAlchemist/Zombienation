@@ -18,6 +18,7 @@ import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -32,9 +33,9 @@ public class InfectionHandler {
     public static final DamageSource ZOMBIFICATION = new DamageSource("zombification");
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
-        if(event.getSource().getEntity() instanceof Zombie || event.getSource().getEntity() instanceof Zolphin || event.getSource().getEntity() instanceof ZombieBear) {
-            if(! (event.getEntityLiving() instanceof Zombie)) {
-                if(!(event.getEntityLiving().hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS))) {
+        if (event.getSource().getEntity() instanceof Zombie || event.getSource().getEntity() instanceof Zolphin || event.getSource().getEntity() instanceof ZombieBear) {
+            if (!(event.getEntityLiving() instanceof Zombie)) {
+                if (!(event.getEntityLiving().hasEffect(PotionsRegistry.POTION_ZOMBIE_VIRUS))) {
                     Random random = new Random();
                     if (random.nextDouble() < ConfigurationHandler.INFECTION.infectionChance.get()) {
                         event.getEntityLiving().addEffect(new MobEffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigurationHandler.INFECTION.infectionDuration.get(), 0, (false), (false)));
@@ -42,32 +43,33 @@ public class InfectionHandler {
                 }
             }
         }
-        if(event.getEntityLiving() instanceof Zombie5) {
-            if(ConfigurationHandler.GENERAL.hazmatZombiesImmuneToPotions.get() && event.getSource().isMagic()) {
+        if (event.getEntityLiving() instanceof Zombie5) {
+            if (ConfigurationHandler.GENERAL.hazmatZombiesImmuneToPotions.get() && event.getSource().isMagic()) {
                 event.setAmount(0.0f);
                 event.setCanceled(true);
             }
         }
 
-        if(event.getSource().getEntity() instanceof EnderMan) {
+        if (event.getSource().getEntity() instanceof EnderMan) {
             //Then deal extra damage to undead
-            if(event.getEntityLiving().getMobType() == MobType.UNDEAD) {
+            if (event.getEntityLiving().getMobType() == MobType.UNDEAD) {
                 event.getEntity().hurt(DamageSource.OUT_OF_WORLD, 10f);
             }
         }
-
-        if(event.getEntity() instanceof Creeper &&
-                (event.getSource().getEntity() instanceof Zombie ||
-                        event.getSource().getEntity() instanceof ZombieBear ||
-                        event.getSource().getEntity() instanceof Zolphin)) {
-            Creeper creeper = (Creeper) event.getEntity();
-            creeper.addEffect(new MobEffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigurationHandler.INFECTION.infectionDuration.get(), (int) 0, true, (false)));
-            creeper.hurt(DamageSource.CACTUS, 1.0f);
-            creeper.setTarget(null);
-            event.setCanceled(true);
-            }
     }
 
+    @SubscribeEvent
+    public static void onAttack(LivingAttackEvent event) {
+        if(event.getEntity() instanceof Creeper &&
+                (event.getSource().getEntity() instanceof Zombie ||
+                 event.getSource().getEntity() instanceof ZombieBear ||
+                 event.getSource().getEntity() instanceof Zolphin)) {
+                    Creeper creeper = (Creeper) event.getEntity();
+                    creeper.addEffect(new MobEffectInstance(PotionsRegistry.POTION_ZOMBIE_VIRUS, ConfigurationHandler.INFECTION.infectionDuration.get(), (int) 0, true, (false)));
+                    creeper.hurt(ZOMBIFICATION, 1.0f);
+                    event.setCanceled(true);
+                }
+    }
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
