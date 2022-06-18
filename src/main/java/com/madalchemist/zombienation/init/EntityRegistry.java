@@ -13,6 +13,7 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.monster.Drowned;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -34,64 +35,46 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = Zombienation.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_DEFERRED = DeferredRegister.create(ForgeRegistries.ENTITIES, Zombienation.MODID);
-    private static final List<Item> SPAWN_EGGS = Lists.newArrayList();
+    public static final DeferredRegister<Item> EGG_DEFERRED = DeferredRegister.create(ForgeRegistries.ITEMS, Zombienation.MODID);
 
     /* Register entities here */
 
-    public static final RegistryObject<EntityType<Zombie1>> ZOMBIE1 =createMonster("zombie1", Zombie1::new, 0.6f, 1.95f, 0x229922, 0xaaaaaa);
-    public static final RegistryObject<EntityType<Zombie2>> ZOMBIE2 =createMonster("zombie2", Zombie2::new, 0.6f, 1.95f, 0x229922, 0x226611);
-    public static final RegistryObject<EntityType<Zombie3>> ZOMBIE3 =createMonster("zombie3", Zombie3::new, 0.6f, 1.95f, 0x229922, 0x334455);
-    public static final RegistryObject<EntityType<Zombie4>> ZOMBIE4 =createMonster("zombie4", Zombie4::new, 0.6f, 1.95f, 0x229922, 0x785209);
-    public static final RegistryObject<EntityType<Zombie5>> ZOMBIE5 =createMonster("zombie5", Zombie5::new, 0.6f, 1.95f, 0x229922, 0xbaba40);
-    public static final RegistryObject<EntityType<Zombie6>> ZOMBIE6 =createMonster("zombie6", Zombie6::new, 0.6f, 1.95f, 0x229922, 0xdead00);
-    public static final RegistryObject<EntityType<Zombie7>> ZOMBIE7 =createMonster("zombie7", Zombie7::new, 0.6f, 1.95f, 0x229922, 0x000000);
-    public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createMonster("zombie8", Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
-    public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createMonster("zombie9", Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
-    public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createMonster("random_zombie", RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
-    public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createMonster("chesthead", Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
-    public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR =createMonster("zombie_bear", ZombieBear::new, 1.4f, 1.4f, 0x888888, 0x008800);
-    public static final RegistryObject<EntityType<BrownBear>> BROWN_BEAR =createAnimal("brown_bear", BrownBear::new, 1.4f, 1.4f, 0x4a2206, 0x999999);
-    public static final RegistryObject<EntityType<Zolphin>> ZOLPHIN =createWaterMob("zombie_dolphin", Zolphin::new, true, 1.4f, 1.4f, 0x99bb99, 0x99ff99);
+    public static final RegistryObject<EntityType<Zombie1>> ZOMBIE1 =createMonster("zombie1", () -> Zombie1::new, 0.6f, 1.95f, 0x229922, 0xaaaaaa);
+    public static final RegistryObject<EntityType<Zombie2>> ZOMBIE2 =createMonster("zombie2", () -> Zombie2::new, 0.6f, 1.95f, 0x229922, 0x226611);
+    public static final RegistryObject<EntityType<Zombie3>> ZOMBIE3 =createMonster("zombie3", () -> Zombie3::new, 0.6f, 1.95f, 0x229922, 0x334455);
+    public static final RegistryObject<EntityType<Zombie4>> ZOMBIE4 =createMonster("zombie4", () -> Zombie4::new, 0.6f, 1.95f, 0x229922, 0x785209);
+    public static final RegistryObject<EntityType<Zombie5>> ZOMBIE5 =createMonster("zombie5", () -> Zombie5::new, 0.6f, 1.95f, 0x229922, 0xbaba40);
+    public static final RegistryObject<EntityType<Zombie6>> ZOMBIE6 =createMonster("zombie6", () -> Zombie6::new, 0.6f, 1.95f, 0x229922, 0xdead00);
+    public static final RegistryObject<EntityType<Zombie7>> ZOMBIE7 =createMonster("zombie7", () -> Zombie7::new, 0.6f, 1.95f, 0x229922, 0x000000);
+    public static final RegistryObject<EntityType<Zombie8>> ZOMBIE8 =createMonster("zombie8", () -> Zombie8::new, 0.6f, 1.95f, 0x229922, 0x452684);
+    public static final RegistryObject<EntityType<Zombie9>> ZOMBIE9 =createMonster("zombie9", () -> Zombie9::new, 0.6f, 1.95f, 0x229922, 0x657564);
+    public static final RegistryObject<EntityType<RandomZombie>> RANDOM_ZOMBIE =createMonster("random_zombie", () -> RandomZombie::new, 0.6f, 1.95f, 0xffffff, 0x000000);
+    public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createMonster("chesthead", () -> Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
+    public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR =createMonster("zombie_bear", () -> ZombieBear::new, 1.4f, 1.4f, 0x888888, 0x008800);
+    public static final RegistryObject<EntityType<BrownBear>> BROWN_BEAR =createAnimal("brown_bear", () -> BrownBear::new, 1.4f, 1.4f, 0x4a2206, 0x999999);
+    public static final RegistryObject<EntityType<Zolphin>> ZOLPHIN =createWaterMob("zombie_dolphin", () -> Zolphin::new,  0.9f, 0.6f, 0x99bb99, 0x99ff99);
     /* End register entites */
 
-    private static <T extends Mob> RegistryObject<EntityType<T>> createMonster(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
-        Zombienation.LOGGER.printf(Level.INFO, "Creating monster:\n");
-        Zombienation.LOGGER.printf(Level.INFO, "Getting resource location:...");
+    private static <T extends Monster> RegistryObject<EntityType<T>> createMonster(String name, Supplier<EntityType.EntityFactory<T>> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
-        Zombienation.LOGGER.printf(Level.INFO, "OK\n");
-        Zombienation.LOGGER.printf(Level.INFO, "Creating EntityType:...");
-        EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        Zombienation.LOGGER.printf(Level.INFO, "OK\n");
-        Zombienation.LOGGER.printf(Level.INFO, "Creating Spawn egg:...");
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
-        Zombienation.LOGGER.printf(Level.INFO, "Ok\n");
-        Zombienation.LOGGER.printf(Level.INFO, "Registering spawn egg...");
-        spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
-        SPAWN_EGGS.add(spawnEgg);
-        Zombienation.LOGGER.printf(Level.INFO, "Ok\n");
-        Zombienation.LOGGER.printf(Level.INFO, "Done, registering monster!\n");
-        return ENTITY_DEFERRED.register(name, () -> entity);
+        RegistryObject<EntityType<T>> entityType = ENTITY_DEFERRED.register(name, () -> EntityType.Builder.of(factory.get(), MobCategory.MONSTER).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString()));
+        EGG_DEFERRED.register(name + "_spawn_egg", () -> new ForgeSpawnEggItem(entityType, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB)));
+        return entityType;
     }
 
-    private static <T extends Animal> RegistryObject<EntityType<T>> createAnimal(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+    private static <T extends Animal> RegistryObject<EntityType<T>> createAnimal(String name, Supplier<EntityType.EntityFactory<T>> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
-        EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
-        spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
-        SPAWN_EGGS.add(spawnEgg);
-        return ENTITY_DEFERRED.register(name, () -> entity);
+        RegistryObject<EntityType<T>> entityType = ENTITY_DEFERRED.register(name, () -> EntityType.Builder.of(factory.get(), MobCategory.CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString()));
+        EGG_DEFERRED.register(name + "_spawn_egg", () -> new ForgeSpawnEggItem(entityType, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB)));
+        return entityType;
     }
 
-    private static <T extends WaterAnimal> RegistryObject<EntityType<T>> createWaterMob(String name, EntityType.EntityFactory<T> factory, boolean isHostile, float width, float height, int eggPrimary, int eggSecondary) {
+    private static <T extends WaterAnimal> RegistryObject<EntityType<T>> createWaterMob(String name, Supplier<EntityType.EntityFactory<T>> factory, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Zombienation.MODID, name);
-        EntityType<T> entity = EntityType.Builder.of(factory, MobCategory.WATER_CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB));
-        spawnEgg.setRegistryName(new ResourceLocation(Zombienation.MODID, name + "_spawn_egg"));
-        SPAWN_EGGS.add(spawnEgg);
-        return ENTITY_DEFERRED.register(name, () -> entity);
+        RegistryObject<EntityType<T>> entityType = ENTITY_DEFERRED.register(name, () -> EntityType.Builder.of(factory.get(), MobCategory.WATER_CREATURE).sized(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString()));
+        EGG_DEFERRED.register(name + "_spawn_egg", () -> new ForgeSpawnEggItem(entityType, eggPrimary, eggSecondary, (new Item.Properties()).tab(ModCreativeModeTab.ZOMBIENATION_TAB)));
+        return entityType;
     }
-
-
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
@@ -128,12 +111,5 @@ public class EntityRegistry {
         event.put(ZOLPHIN.get(), Zolphin.createAttributes().build());
     }
 
-    @SubscribeEvent
-    public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
-        for (Item spawnEgg : SPAWN_EGGS) {
-            Preconditions.checkNotNull(spawnEgg.getRegistryName(), "registryName");
-            event.getRegistry().register(spawnEgg);
-        }
-    }
 }
 

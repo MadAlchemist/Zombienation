@@ -55,6 +55,7 @@ public class Zombienation {
 
     public static void registerDeferredRegistries(IEventBus modBus) {
         EntityRegistry.ENTITY_DEFERRED.register(modBus);
+        EntityRegistry.EGG_DEFERRED.register(modBus);
         ItemsRegistry.ITEMS.register(modBus);
     }
 
