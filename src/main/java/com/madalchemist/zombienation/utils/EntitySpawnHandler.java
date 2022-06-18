@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Drowned;
@@ -46,6 +47,20 @@ public class EntitySpawnHandler {
                 event.setCanceled(true);
                 BlockableEventLoop<Runnable> executor = (BlockableEventLoop<Runnable>) LogicalSidedProvider.WORKQUEUE.get(event.getWorld().isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
                 executor.tell(new TickTask(0, () -> event.getWorld().addFreshEntity(zombie)));
+            }
+        }
+
+        if(event.getEntity() instanceof Wolf) {
+            Wolf wolf = (Wolf) event.getEntity();
+            if (!wolf.isTame()) {
+                Random random = new Random();
+                if(random.nextInt(20) > 18) {
+                    BrownBear bear = new BrownBear(EntityRegistry.BROWN_BEAR.get(), wolf.level);
+                    bear.setPos(wolf.getX(), wolf.getY(), wolf.getZ());
+                    BlockableEventLoop<Runnable> executor = (BlockableEventLoop<Runnable>) LogicalSidedProvider.WORKQUEUE.get(event.getWorld().isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
+                    executor.tell(new TickTask(0, () -> event.getWorld().addFreshEntity(bear)));
+                    event.setCanceled(true);
+                }
             }
         }
 
