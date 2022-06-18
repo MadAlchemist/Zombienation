@@ -2,6 +2,7 @@ package com.madalchemist.zombienation.entity;
 
 import com.madalchemist.zombienation.Zombienation;
 import com.madalchemist.zombienation.init.EntityRegistry;
+import com.madalchemist.zombienation.utils.BiomeDictionaryHelper;
 import com.madalchemist.zombienation.utils.ConfigurationHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -84,13 +86,13 @@ public class RandomZombie extends Zombie {
                event.getEntity().level.addFreshEntity(zombie8);
                break;
             case 8:
-               /*
-               if(event.getEntity().level.getBiome(new BlockPos(event.getEntity().getX(),event.getEntity().getY(),event.getEntity().getZ()))..equals(Biome.BiomeCategory.ICY)) {
+
+               if(event.getEntity().level.getBiome(event.getEntity().getOnPos()).value().coldEnoughToSnow(event.getEntity().getOnPos())) {
                   Zombie9 zombie9 = new Zombie9(EntityRegistry.ZOMBIE9.get(), event.getEntity().level);
                   zombie9.setPos(new Vec3(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ()));
                   event.getEntity().level.addFreshEntity(zombie9);
                }
-               break; */
+               break;
             case 9:
                Zombie zombie = new Zombie(EntityType.ZOMBIE, event.getEntity().level);
                zombie.setPos(new Vec3(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ()));
