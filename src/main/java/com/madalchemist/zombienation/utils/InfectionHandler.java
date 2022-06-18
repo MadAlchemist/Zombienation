@@ -9,7 +9,6 @@ import com.madalchemist.zombienation.init.EntityRegistry;
 import com.madalchemist.zombienation.init.PotionsRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.animal.Dolphin;
@@ -130,6 +129,7 @@ public class InfectionHandler {
             event.getEntityLiving().level.addFreshEntity(zombie);
             zombie.removeAllEffects();
         }
+
         if(event.getEntityLiving() instanceof Dolphin && event.getPotionEffect().getEffect().getClass() == PotionZombieVirus.class) {
             Zolphin zombie = new Zolphin(EntityRegistry.ZOLPHIN.get(), event.getEntityLiving().level);
             zombie.setCustomName(event.getEntityLiving().getCustomName());

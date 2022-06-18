@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.animal.PolarBear;
@@ -55,7 +54,6 @@ public class EntitySpawnHandler {
         }
 
         if(event.getEntity() instanceof Zombie) {
-
             ((Zombie)event.getEntity()).targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), BrownBear.class, true));
             ((Zombie)event.getEntity()).targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), PolarBear.class, true));
             ((Zombie)event.getEntity()).targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(((Zombie)event.getEntity()), Horse.class, true));
@@ -113,7 +111,8 @@ public class EntitySpawnHandler {
         }
 
         if(event.getEntity() instanceof Dolphin) {
-            ((Dolphin)event.getEntity()).targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(((Dolphin)event.getEntity()), Drowned.class, 10, true, true, (Predicate<LivingEntity>)null));
+            ((Dolphin) event.getEntity()).targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(((Dolphin) event.getEntity()), Drowned.class, 10, true, true, (Predicate<LivingEntity>) null));
         }
+
     }
 }

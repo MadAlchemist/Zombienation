@@ -50,7 +50,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<Chesthead>> CHESTHEAD =createMonster("chesthead", Chesthead::new, 0.6f, 1.95f, 0xfa5401, 0x450823);
     public static final RegistryObject<EntityType<ZombieBear>> ZOMBIE_BEAR =createMonster("zombie_bear", ZombieBear::new, 1.4f, 1.4f, 0x888888, 0x008800);
     public static final RegistryObject<EntityType<BrownBear>> BROWN_BEAR =createAnimal("brown_bear", BrownBear::new, 1.4f, 1.4f, 0x4a2206, 0x999999);
-    public static final RegistryObject<EntityType<Zolphin>> ZOLPHIN =createWaterMob("zolphin", Zolphin::new, true, 1.4f, 1.4f, 0x99bb99, 0x99ff99);
+    public static final RegistryObject<EntityType<Zolphin>> ZOLPHIN =createWaterMob("zombie_dolphin", Zolphin::new, true, 1.4f, 1.4f, 0x99bb99, 0x99ff99);
     /* End register entites */
 
     private static <T extends Mob> RegistryObject<EntityType<T>> createMonster(String name, EntityType.EntityFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {

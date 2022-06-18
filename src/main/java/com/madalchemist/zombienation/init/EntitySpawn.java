@@ -19,10 +19,12 @@ public class EntitySpawn {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void addSpawn(BiomeLoadingEvent event) {
+
         if (event.getName() != null) {
             Biome biome = ForgeRegistries.BIOMES.getValue(event.getName());
             ResourceKey<Biome> resourceKey = ResourceKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
             if (BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD).contains(resourceKey)) {
+
                 event.getSpawns().getSpawner(MobCategory.MONSTER)
                         .add(new MobSpawnSettings.SpawnerData(EntityRegistry.RANDOM_ZOMBIE.get(),
                                 ConfigurationHandler.SPAWN.spawnWeight.get(),
