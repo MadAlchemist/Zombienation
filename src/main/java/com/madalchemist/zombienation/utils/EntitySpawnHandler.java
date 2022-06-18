@@ -24,11 +24,12 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.LogicalSidedProvider;
+
 
 import java.util.Random;
 import java.util.function.Predicate;
@@ -43,7 +44,7 @@ public class EntitySpawnHandler {
                 RandomZombie zombie = new RandomZombie(EntityRegistry.RANDOM_ZOMBIE.get(), event.getEntity().level);
                 zombie.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                 event.setCanceled(true);
-                BlockableEventLoop<Runnable> executor = LogicalSidedProvider.WORKQUEUE.get(event.getWorld().isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
+                BlockableEventLoop<Runnable> executor = (BlockableEventLoop<Runnable>) LogicalSidedProvider.WORKQUEUE.get(event.getWorld().isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
                 executor.tell(new TickTask(0, () -> event.getWorld().addFreshEntity(zombie)));
             }
         }
